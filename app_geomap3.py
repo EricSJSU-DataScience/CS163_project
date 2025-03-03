@@ -3,11 +3,12 @@ from dash import Dash, html, dash_table, dcc
 import pandas as pd
 import folium
 from folium.plugins import MarkerCluster
+import time
 
 # ---------------------
 # Step 1. Data Loading & Cleaning
 # ---------------------
-
+time_start = time.time()    # debug variable
 # Load business data
 file_path = 'dataset\\Listing_of_All_Businesses_20250202.csv'
 df = pd.read_csv(file_path,
@@ -29,8 +30,11 @@ df1.loc[:, '5d_zip'] = df1['ZIP CODE'].astype(str).str.split('-').str[0]
 # Filter to only include records whose 5-digit zip is in the valid list
 df2 = df1[df1['5d_zip'].isin(zip_code_list)].copy()
 
+time_end = time.time()  # debug variable
+print(f'Step 1 completed! Time: {(time_end - time_start): .1f} second')   # debug variable
 # ---------------------
 # Step 2. Parse Coordinates from the "LOCATION" Column
+time_start = time.time()    # debug variable
 # ---------------------
 def parse_location(location_str):
     try:
@@ -43,9 +47,13 @@ def parse_location(location_str):
 df2[['latitude', 'longitude']] = df2['LOCATION'].apply(parse_location).apply(pd.Series)
 df2 = df2.dropna(subset=['latitude', 'longitude'])
 
+time_end = time.time()  # debug variable
+print(f'Step 2 completed! Time: {(time_end - time_start): .1f} second')   # debug variable
 # ---------------------
 # Step 3. Filter Data Based on Coordinate Range
 # ---------------------
+time_start = time.time()    # debug variable
+
 latitudes_max = 34.45
 latitudes_min = 33.24
 longitudes_max = -116.8
@@ -55,10 +63,17 @@ df2_filtered = df2[
     (df2['latitude'] >= latitudes_min) & (df2['latitude'] <= latitudes_max) &
     (df2['longitude'] >= longitudes_min) & (df2['longitude'] <= longitudes_max)
 ]
-# df2_sample = df2_filtered.sample(n=1000)
+
+# df2_filtered.to_csv('df2_filtered.csv', index=False)
+# print(f'filtered dataset saved!')
+
+time_end = time.time()  # debug variable
+print(f'Step 3 completed! Time: {(time_end - time_start): .1f} second')   # debug variable
 # ---------------------
 # Step 4. Build a Folium Map with Marker Clusters
 # ---------------------
+time_start = time.time()    # debug variable
+
 # Set the map center (manually set to LA Union Station Parking as an example)
 map_center = [34.05525, -118.23737]
 business_map = folium.Map(location=map_center, zoom_start=12)
@@ -75,6 +90,9 @@ for _, row in df2_filtered.iterrows():
 # Convert the Folium map to an HTML representation
 map_html = business_map._repr_html_()
 
+time_end = time.time()  # debug variable
+print(f'Step 4 completed! Time: {((time_end - time_start) / 60) : .1f} minute')   # debug variable
+
 # ---------------------
 # Step final. Create the Dash App
 # ---------------------
@@ -83,6 +101,7 @@ app = Dash(__name__)
 app.layout = html.Div([
     html.H1("Business Map Dashboard"),
     html.Div("Businesses filtered by valid zip codes and within specific coordinate bounds."),
+    html.Hr(),
     html.Hr(),
     html.Div("Map View:", style={"marginTop": 20}),
     # Embed the Folium map in an IFrame using the srcDoc property.
