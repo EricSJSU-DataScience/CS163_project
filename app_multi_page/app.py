@@ -7,7 +7,7 @@ server = app.server
 app.layout = html.Div([
     html.Div(
             style={
-                "background-image": "url('/assets/la-background.jpg')",  # Replace with your image filename
+                "background-image": "url('/assets/la-background.jpg')", 
                 "background-size": "cover",
                 "background-position": "center",
                 "opacity": "0.5",
