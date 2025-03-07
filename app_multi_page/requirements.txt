@@ -1,0 +1,7 @@
+dash
+plotly
+pandas
+Flask
+folium
+gunicorn
+google-cloud-storage
