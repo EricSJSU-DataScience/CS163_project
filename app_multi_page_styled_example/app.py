@@ -1,20 +1,19 @@
 import dash
 from dash import html
 
-# Initialize the Dash app
+# Define the paths to local CSS and JS files
 external_stylesheets = [
-    "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
-    # Grayscale custom theme (if hosted or if you have a direct URL)
-    # "https://your-cdn-or-github-pages/grayscale.css",
+    "/assets/css/bootstrap.min.css",
+    "/assets/css/all.min.css"
 ]
 
 external_scripts = [
-    "https://code.jquery.com/jquery-3.5.1.slim.min.js",
-    "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js",
-    "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js",
+    "/assets/js/jquery-3.5.1.slim.min.js",
+    "/assets/js/popper.min.js",
+    "/assets/js/bootstrap.min.js"
 ]
 
+# Initialize the Dash app with local resources
 app = dash.Dash(
     __name__,
     external_stylesheets=external_stylesheets,
@@ -169,6 +168,8 @@ app.layout = html.Div([
         )
     )
 ])
+
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
