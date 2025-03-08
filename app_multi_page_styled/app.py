@@ -1,26 +1,43 @@
 import dash
-from dash import html
+from dash import html, dcc
+import dash_bootstrap_components as dbc  # Optional if you want to use additional Bootstrap components
 
-# Define the paths to local CSS and JS files
+# Use the external resources from your example app.py
 external_stylesheets = [
     "/assets/css/bootstrap.min.css",
     "/assets/css/all.min.css"
 ]
-
 external_scripts = [
     "/assets/js/jquery-3.5.1.slim.min.js",
     "/assets/js/popper.min.js",
     "/assets/js/bootstrap.min.js"
 ]
 
-# Initialize the Dash app with local resources
+# Initialize the Dash app with multi-page support
 app = dash.Dash(
     __name__,
+    use_pages=True,
     external_stylesheets=external_stylesheets,
-    external_scripts=external_scripts
+    external_scripts=external_scripts,
+    suppress_callback_exceptions=True
 )
+server = app.server
 
-# Define the layout mimicking the Grayscale structure
+# Build the navigation bar based on dash.page_registry
+nav_items = []
+for page in dash.page_registry.values():
+    nav_items.append(
+        html.Li(
+            dcc.Link(
+                page["name"],
+                href=page["relative_path"],
+                className="nav-link js-scroll-trigger"
+            ),
+            className="nav-item"
+        )
+    )
+
+
 app.layout = html.Div([
     # Navigation bar
     html.Nav(
@@ -30,7 +47,7 @@ app.layout = html.Div([
             html.Div(
                 className="container",
                 children=[
-                    html.A("Start Bootstrap", className="navbar-brand", href="#page-top"),
+                    html.A("LA Area", className="navbar-brand", href="/"),
                     html.Button(
                         className="navbar-toggler navbar-toggler-right",
                         type="button",
@@ -39,7 +56,7 @@ app.layout = html.Div([
                             "data-target": "#navbarResponsive",
                             "aria-controls": "navbarResponsive",
                             "aria-expanded": "false",
-                            "aria-label": "Toggle navigation",
+                            "aria-label": "Toggle navigation"
                         },
                         children=[
                             "Menu ",
@@ -49,22 +66,14 @@ app.layout = html.Div([
                     html.Div(
                         className="collapse navbar-collapse",
                         id="navbarResponsive",
-                        children=html.Ul(
-                            className="navbar-nav ml-auto",
-                            children=[
-                                html.Li(className="nav-item", children=html.A("Home", className="nav-link js-scroll-trigger", href="#page-top")),
-                                html.Li(className="nav-item", children=html.A("About", className="nav-link js-scroll-trigger", href="#about")),
-                                html.Li(className="nav-item", children=html.A("Projects", className="nav-link js-scroll-trigger", href="#projects")),
-                                html.Li(className="nav-item", children=html.A("Contact", className="nav-link js-scroll-trigger", href="#contact")),
-                            ]
-                        )
+                        children=html.Ul(nav_items, className="navbar-nav ml-auto")
                     )
                 ]
             )
         ]
     ),
-    
-    # Header (Masthead) Section
+
+    # Header Section (Masthead)
     html.Header(
         className="masthead",
         children=html.Div(
@@ -72,104 +81,23 @@ app.layout = html.Div([
             children=html.Div(
                 className="mx-auto text-center",
                 children=[
-                    html.H1("Your Favorite Source of Free Bootstrap Themes", className="mx-auto my-0 text-uppercase"),
-                    html.H2("Start Bootstrap can help you build better websites with free, open source, and easy to use themes.", className="text-white-50 mx-auto mt-2 mb-5"),
-                    html.A("Get Started", className="btn btn-primary js-scroll-trigger", href="#about")
+                    html.H1("Business Trends and Market Analysis"),
+                    # html.H2("Data-Driven Insights and Interactive Visualizations"),
+                    html.A("Learn More", className="btn btn-primary js-scroll-trigger", href="/")
                 ]
             )
         )
     ),
-    
-    # About Section
-    html.Section(
-        id="about",
-        className="about-section text-center",
-        children=html.Div(
-            className="container",
-            children=html.Div(
-                className="row",
-                children=html.Div(
-                    className="col-lg-8 mx-auto",
-                    children=[
-                        html.H2("Built with Bootstrap 4"),
-                        html.P("This theme features a variety of sections and elements, all built with Bootstrap.", className="lead")
-                    ]
-                )
-            )
-        )
-    ),
-    
-    # Projects Section
-    html.Section(
-        id="projects",
-        className="projects-section bg-light",
-        children=html.Div(
-            className="container",
-            children=[
-                html.Div(
-                    className="row align-items-center no-gutters mb-4 mb-lg-5",
-                    children=[
-                        html.Div(
-                            className="col-xl-8 col-lg-7",
-                            children=html.Img(src="/assets/img/demo-image-01.jpg", className="img-fluid mb-3 mb-lg-0", alt="Demo image")
-                        ),
-                        html.Div(
-                            className="col-xl-4 col-lg-5",
-                            children=html.Div(
-                                className="featured-text text-center text-lg-left",
-                                children=[
-                                    html.H4("Mighty Desktop"),
-                                    html.P("A great desktop application built with modern technologies.", className="text-black-50")
-                                ]
-                            )
-                        )
-                    ]
-                ),
-                # Additional project rows can be added here following the same structure.
-            ]
-        )
-    ),
-    
-    # Contact Section
-    html.Section(
-        id="contact",
-        className="contact-section bg-black",
-        children=html.Div(
-            className="container",
-            children=html.Div(
-                className="row",
-                children=[
-                    html.Div(
-                        className="col-md-4 mb-3 mb-md-0",
-                        children=html.Div(
-                            className="card py-4 h-100",
-                            children=html.Div(
-                                className="card-body text-center",
-                                children=[
-                                    html.I(className="fas fa-map-marked-alt text-primary mb-2"),
-                                    html.H4("Address", className="text-uppercase m-0"),
-                                    html.H6("1234 Street Name, City, State", className="m-0")
-                                ]
-                            )
-                        )
-                    ),
-                    # Additional contact columns can be added here.
-                ]
-            )
-        )
-    ),
-    
+
+    # Content container for page content (renders pages registered via Dash)
+    html.Div(dash.page_container),
+
     # Footer Section
     html.Footer(
         className="bg-black small text-center text-white-50",
-        children=html.Div(
-            className="container",
-            children="SJSU CS163"
-        )
+        children=html.Div("SJSU CS163")
     )
 ])
-
-
 
 if __name__ == '__main__':
     app.run_server(debug=True)
