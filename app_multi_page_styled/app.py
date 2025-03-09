@@ -81,7 +81,7 @@ app.layout = html.Div([
             children=html.Div(
                 className="mx-auto text-center",
                 children=[
-                    html.H1("Business Trends and Market Analysis"),
+                    html.H1("Business\n Trends and Market\n Analysis"),
                     # html.H2("Data-Driven Insights and Interactive Visualizations"),
                     html.A("Learn More", className="btn btn-primary js-scroll-trigger", href="/")
                 ]
