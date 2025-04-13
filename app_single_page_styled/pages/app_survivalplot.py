@@ -34,13 +34,15 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600, is_open=False)
     -----------
     df : pandas.DataFrame
         DataFrame that must include:
-         - 'is_open': where closed businesses are marked as 'No'
+         - 'is_open': dataset modify to boolean dtype recently
          - 'duration': the duration (in months) of each business.
          - 'NAICS-2_Title': the industry classification.
     industries : list
         List of industry names to filter on.
     max_time : int, optional
         Maximum time (in months) to display on the x-axis (default is 600).
+    is_open : boolean, optional
+        select open/closed business
 
     Returns:
     --------
