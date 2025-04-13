@@ -13,7 +13,7 @@ time_start = time.time()
 url = 'https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_subset.csv'
 df_preworked = pd.read_csv(url, dtype={"NAICS": "Int64"})
 time_end = time.time()
-print(f'Data Loading completed! Time: {(time_end - time_start): .1f} second')
+print(f'geomap\t\tdata Loading completed!\tTime: {(time_end - time_start): .1f} second')
 
 # ---------------------
 # dictionary of NAICS 2-digits information
@@ -66,7 +66,7 @@ def create_map_naics(selected_sector):
     points = df_filtered[['latitude', 'longitude']].values.tolist()
     FastMarkerCluster(points).add_to(business_map)
     et = time.time()
-    print(f'Function create_map: {(et - st): 0.1f} seconds')
+    print(f'geomap\t\tFunction create_map: {(et - st): 0.1f} seconds')
     return business_map._repr_html_()
 
 # ---------------------

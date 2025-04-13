@@ -8,11 +8,8 @@ import time
 # ---------------------
 # Step 1. Data Loading
 # ---------------------
-# For this example we assume the same CSV is used.
-# The CSV is expected to include at least the following columns:
-#   - 'is_open': where closed businesses are marked as 'No'
-#   - 'duration': the duration (in months) of each business
-#   - 'NAICS-2_Title': the industry classification (e.g., 'Retail Trade', etc.)
+time_start = time.time()
+# business_filtered.csv
 url = "https://media.githubusercontent.com/media/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_filtered.csv"
 df = pd.read_csv(url, usecols=["NAICS", "is_open", "duration"])
 df["NAICS-2"] = df["NAICS"].map(lambda n: int(n / 10000))
@@ -21,13 +18,14 @@ naics_file = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_proje
 df_naics = pd.read_csv(naics_file)
 code_sector_dict = df_naics.set_index("Code")["Sector_Title"].to_dict()
 df["NAICS-2_Title"] = df["NAICS-2"].map(code_sector_dict)
-print("Data Loading completed!")
+time_end = time.time()
+print(f"survivalplot\tdata Loading completed!\tTime: {(time_end - time_start): .1f} second")
 
 
 # ---------------------
 # Function Definitions
 # ---------------------
-def plot_kaplan_meier_by_industries(df, industries, max_time=600):
+def plot_kaplan_meier_by_industries(df, industries, max_time=600, is_open=False):
     """
     Computes and returns a Plotly figure with Kaplan-Meier survival curves for closed businesses
     for multiple industries.
@@ -56,11 +54,11 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600):
     for industry in industries:
         # Filter for closed businesses in the given industry.
         if pd.isna(industry):
-            df_ind = df[(df["NAICS-2_Title"].isna()) & (df["is_open"] == "No")].copy()
+            df_ind = df[(df["NAICS-2_Title"].isna()) & (df["is_open"] == is_open)].copy()
             industry_label = "NaN"
         else:
             df_ind = df[
-                (df["NAICS-2_Title"] == industry) & (df["is_open"] == "No")
+                (df["NAICS-2_Title"] == industry) & (df["is_open"] == is_open)
             ].copy()
             industry_label = industry
 
@@ -120,7 +118,7 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600):
         height=600,
     )
     time_end = time.time()
-    print(f'Function survival curve: {(time_end - time_start): .1f} second')
+    print(f'survivalplot\tFunction survival curve: {(time_end - time_start): .1f} second')
 
     return fig
 
@@ -231,7 +229,12 @@ def get_survival_plot_component():
             ], width="auto"),
 
         ], justify="center", align="center"),
-        dcc.Graph(id="survival-graph", figure={}),
+        dcc.Graph(
+            id="survival-graph", 
+            figure={},
+            style={"width": "100%", "height": "auto", "display": "block"}, 
+            config={"responsive": True}
+        ),
         html.Hr(),
     ])
 
