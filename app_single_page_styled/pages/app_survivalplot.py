@@ -25,10 +25,9 @@ print(f"survivalplot\tdata Loading completed!\tTime: {(time_end - time_start): .
 # ---------------------
 # Function Definitions
 # ---------------------
-def plot_kaplan_meier_by_industries(df, industries, max_time=600, is_open=False):
+def plot_kaplan_meier_by_industries(df, industries, max_time=600):
     """
-    Computes and returns a Plotly figure with Kaplan-Meier survival curves for closed businesses
-    for multiple industries.
+    Computes and returns a Plotly figure with Kaplan-Meier survival curves for multiple industries.
 
     Parameters:
     -----------
@@ -41,8 +40,6 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600, is_open=False)
         List of industry names to filter on.
     max_time : int, optional
         Maximum time (in months) to display on the x-axis (default is 600).
-    is_open : boolean, optional
-        select open/closed business
 
     Returns:
     --------
@@ -55,13 +52,12 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600, is_open=False)
     # Loop over each industry in the provided list.
     for industry in industries:
         # Filter for closed businesses in the given industry.
+        # original idea may wrong, survival analysis should keep both.
         if pd.isna(industry):
-            df_ind = df[(df["NAICS-2_Title"].isna()) & (df["is_open"] == is_open)].copy()
+            df_ind = df[(df["NAICS-2_Title"].isna())].copy()
             industry_label = "NaN"
         else:
-            df_ind = df[
-                (df["NAICS-2_Title"] == industry) & (df["is_open"] == is_open)
-            ].copy()
+            df_ind = df[(df["NAICS-2_Title"] == industry)].copy()
             industry_label = industry
 
         # Skip if no data is available for this industry.
@@ -72,7 +68,8 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600, is_open=False)
         df_ind["duration_rounded"] = df_ind["duration"].round(1)
 
         # Count the number of closures (events) at each unique rounded duration.
-        event_counts = df_ind["duration_rounded"].value_counts().sort_index()
+        # event_counts = df_ind["duration_rounded"].value_counts().sort_index()
+        event_counts = df_ind[df_ind["is_open"] == False]["duration_rounded"].value_counts().sort_index()
         unique_times = event_counts.index
 
         # Compute the number at risk just before each event time.
