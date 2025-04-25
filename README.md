@@ -1,3 +1,63 @@
+<a name="readme-top"></a>
+
+<!-- PROJECT TITLE / LOGO -->
+<div align="center">
+  <!-- Optional logo -->
+  <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
+
+  <h3 align="center">🚀 LA-Business Survival Pipeline</h3>
+
+  <p align="center">
+    End-to-end analytics &amp; interactive Dash site for exploring the survival patterns of Los Angeles businesses
+    <br />
+    <a href="<!-- ✍️ TODO: GitHub repo link -->"><strong>Explore the repo »</strong></a>
+    ·
+    <a href="<!-- ✍️ TODO: issue link -->">Report Bug</a>
+    ·
+    <a href="<!-- ✍️ TODO: issue link -->">Request Feature</a>
+  </p>
+</div>
+
+---
+
+## 📑 About the Project
+<!-- ✍️ TODO: 2-3 sentence elevator pitch (What/Why/Outcome). -->
+While building this project we wanted a reproducible, transparent workflow that takes raw LA business license data all the way to an interactive Kaplan-Meier dashboard.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+<details>
+<summary><strong>Table of Contents</strong></summary>
+
+1. [About the Project](#-about-the-project)  
+2. [Pipeline Walk-through](#-pipeline-walk-through)  
+3. [Directory Information](#-directory-information)  
+4. [Environment & Setup](#-environment--setup)  
+5. [Usage ⟶ Run the Pipeline](#-usage⟶run-the-pipeline)  
+6. [Live Website](#-live-website)  
+7. [Roadmap](#-roadmap)  
+8. [Built With](#-built-with)  
+9. [Contact](#-contact)  
+<!-- 10. [License](#-license) -->
+</details>
+
+---
+
+## 🔄 Pipeline Walk-through
+A high-level view from raw data to published site:
+
+```mermaid
+graph TD
+    A[Data Collection] --> B[Cleaning & EDA Notebooks]
+    B --> C[ML & Survival Models]
+    C --> D[Interactive Dash App]
+    D --> E[Deployment (GCP / PythonAnywhere)]
+
+
+
+
 
 ---
 dataset_la_business_EDA.ipynb
