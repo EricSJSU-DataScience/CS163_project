@@ -4,8 +4,10 @@
 <div align="center">
   <!-- Optional logo -->
   <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
-
-  <h3 align="center">🚀 LA-Business Survival Pipeline</h3>
+    <!-- 🚀 -->
+  <h3 align="center">Business Trends </h3>
+  <h3 align="center">& Market Analysis </h3>
+  <h3 align="center">in Los Angeles </h3>
 
   <p align="center">
     End-to-end analytics &amp; interactive Dash site for exploring the survival patterns of Los Angeles businesses
@@ -20,17 +22,9 @@
 
 ---
 
-## 📑 About the Project
-<!-- ✍️ TODO: 2-3 sentence elevator pitch (What/Why/Outcome). -->
-While building this project we wanted a reproducible, transparent workflow that takes raw LA business license data all the way to an interactive Kaplan-Meier dashboard.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
 <details>
 <summary><strong>Table of Contents</strong></summary>
-
+<!-- 
 1. [About the Project](#-about-the-project)  
 2. [Pipeline Walk-through](#-pipeline-walk-through)  
 3. [Directory Information](#-directory-information)  
@@ -40,8 +34,39 @@ While building this project we wanted a reproducible, transparent workflow that 
 7. [Roadmap](#-roadmap)  
 8. [Built With](#-built-with)  
 9. [Contact](#-contact)  
-<!-- 10. [License](#-license) -->
+10. [License](#-license) 
+-->
+
+1. [About the Project](#-about-the-project) 
+2. [Initial Data Distribution Analysis](#-initial-data-distribution-analysis) 
+3. [Directory Information](#-directory-information) 
+4. [Geospatial Visualization of Business Distribution](#-geospatial-visualization-of-business-distribution) 
+5. [Data Filtering](#-data-filtering) 
+6. [Survival Probability Analysis & Curve Plotting](#-survival-probability-analysis--curve-plotting) 
+7. [Machine Learning-Based Data Interpretation](#-machine-learning-based-data-interpretation) 
+    - [LSTM Model Application](#-lstm-model-application) 
+    - [Random Survival Forest Analysis](#-random-survival-forest-analysis) 
+
+8. [Environment & Setup](#-environment--setup) 
+9. [Usage ⟶ Run the Analysis/Website](#-usage⟶run-the-analysiswebsite) 
+10. [Live Website](#-live-website) 
+11. [Roadmap](#-roadmap) 
+<!-- 12. [Built With](#-built-with)  -->
+13. [Contact](#-contact)
+
+
 </details>
+
+
+
+
+---
+
+## 📑 About the Project
+<!-- ✍️ TODO: 2-3 sentence elevator pitch (What/Why/Outcome). -->
+While building this project we wanted a reproducible, transparent workflow that takes raw LA business license data all the way to an interactive Kaplan-Meier dashboard.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
@@ -55,9 +80,59 @@ graph TD
     C --> D[Interactive Dash App]
     D --> E[Deployment (GCP / PythonAnywhere)]
 
+```
 
 
 
+## 📁 Directory Information
+
+.
+├── app_multi_page/            # Dash multipage production site
+├── app_single_page_styled/    # Lightweight single-page demo
+├── dataset/                   # Raw & curated data assets
+├── notebooks/                 # Jupyter notebooks for EDA & modeling
+│   ├── dataset_la_business.ipynb
+│   ├── dataset_la_business_EDA.ipynb
+│   └── ...
+├── models/                    # Saved *.keras & joblib artefacts
+├── requirements.txt           # Python deps (pip)
+├── environment.yml            # Conda env (GPU-ready)
+└── README.md
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Machine Learning-Based Data Interpretation
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## LSTM Model
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Random Survival Forest
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## 🌐 Website
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+## ℹ️ Contact
+
+[Eric's LindedIn](https://www.linkedin.com/in/eric-zhao-data-scientist/)
+
+[Ruxin's LinkedIn](https://www.linkedin.com/in/ruxin-xie-1a76232b3/)
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 dataset_la_business_EDA.ipynb
