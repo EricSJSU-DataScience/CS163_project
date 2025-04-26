@@ -77,6 +77,8 @@ This repository provides data-driven insights into business survival trends in L
 ├── dataset/                          # Raw & processed data assets (tracked via Git LFS)
 ├── pic/                              # picture graph plot 
 │
+├── README.md                        # 👉 Project overview, setup & pipeline guide
+│
 ├── dataset_business_city_list.ipynb               # City info in map
 ├── dataset_business_naics_code.ipynb              # NAICS info for industry in map
 ├── dataset_business_zipcode_list.ipynb            # Zip info for map
@@ -86,7 +88,7 @@ This repository provides data-driven insights into business survival trends in L
 ├── dataset_la_business_rox.ipynb                  # Ruxin original analysis
 ├── dataset_la_business_visualization.ipynb        # Plotly visual drafts
 │
-├── requirements.txt                 # Python dependencies for notebooks & app
+└── requirements.txt                 # Python dependencies for notebooks & app
 └── README.md                        # 👉 Project overview, setup & pipeline guide
 
 ```
