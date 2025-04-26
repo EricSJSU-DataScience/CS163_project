@@ -193,6 +193,7 @@ Survival analysis (dataset_la_business_visualization.ipynb) employed Kaplan-Meie
 
 LSTM was selected primarily driven by its capability to handle sequential data, essential for capturing fluctuations in total number of actived businesses across periods.
 
+Random Survival Forest (RSF) model was selected due to its decision tree, a variance of Random Forest model. The dataset could use start-year, month, NAICS, and district info to feed this model and predict a new business opening in the future.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -204,10 +205,12 @@ LSTM was selected primarily driven by its capability to handle sequential data, 
 
 Long Short-Term Memory (LSTM) model was employed due to its effectiveness in modeling temporal sequences inherent in business data. The dataset, aggregated monthly, allowed the LSTM model to learn and predict business dynamics over time by recognizing sequential dependencies and temporal patterns. 
 
-Random Survival Forest (RSF) model was selected due to its decision tree, a variance of Random Forest model. The dataset could use start-year, month, NAICS, and district info to feed this model and predict a new business opening in the future.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+A Random Survival Forest (RSF) models business time‑to‑closure while naturally handling censored, still‑open cases. Trained on start year/month, council district, and 2‑digit NAICS sector for ~500 k cleaned records.
+
 
 ---
 
