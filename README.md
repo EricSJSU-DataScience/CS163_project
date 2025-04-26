@@ -173,7 +173,13 @@ Data filtering optimized visualization by focusing on valid geographic coordinat
 
 ---
 
+<!-- survial analysis & kaplan-meier curve -->
 ## 📉 Survival Analysis & Graph
+
+- [Survival Analysis](https://datatab.net/tutorial/survival-analysis)
+- [Kaplan Meier Curve](https://datatab.net/tutorial/kaplan-meier-curve)
+
+Survival analysis (dataset_la_business_visualization.ipynb) employed Kaplan-Meier methods to examine business longevity across industries. Survival curves illustrated sector-specific probabilities of businesses remaining operational over time, highlighting notable annual drops in survival rates. Although log-rank tests were applied, their outcomes were less intuitive visually.
 
 
 
@@ -185,6 +191,8 @@ Data filtering optimized visualization by focusing on valid geographic coordinat
 <!-- Machine Learning -->
 ## 📊 Machine Learning-Based Data Interpretation
 
+LSTM was selected primarily driven by its capability to handle sequential data, essential for capturing fluctuations in total number of actived businesses across periods.
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -194,6 +202,9 @@ Data filtering optimized visualization by focusing on valid geographic coordinat
 <!-- Long Short Term Memory -->
 ### LSTM Model
 
+Long Short-Term Memory (LSTM) model was employed due to its effectiveness in modeling temporal sequences inherent in business data. The dataset, aggregated monthly, allowed the LSTM model to learn and predict business dynamics over time by recognizing sequential dependencies and temporal patterns. 
+
+Random Survival Forest (RSF) model was selected due to its decision tree, a variance of Random Forest model. The dataset could use start-year, month, NAICS, and district info to feed this model and predict a new business opening in the future.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
