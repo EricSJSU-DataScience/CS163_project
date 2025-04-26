@@ -100,7 +100,7 @@ This repository provides data-driven insights into business survival trends in L
 ---
 
 <!-- data analysis pipline & approach to analyzing idea -->
-## Pipline Overview
+## 🔃 Pipline Overview
 
 1. Data Collection:
     - Active and closed business records from [Los Angeles Open Data Portal](https://data.lacity.org/Administration-Finance/Listing-of-All-Businesses/r4uk-afju/about_data)
