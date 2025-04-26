@@ -25,7 +25,7 @@ print(f"survivalplot\tdata Loading completed!\tTime: {(time_end - time_start): .
 # ---------------------
 # Function Definitions
 # ---------------------
-def plot_kaplan_meier_by_industries(df, industries, max_time=600):
+def plot_kaplan_meier_by_industries(df, industries, max_time=600, y_lower=0.2):
     """
     Computes and returns a Plotly figure with Kaplan-Meier survival curves for multiple industries.
 
@@ -100,7 +100,8 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600):
 
     # Define x-axis ticks (every 12 months).
     xticks = list(np.arange(0, max_time + 12, 12))
-
+    # y_lower = 0.2
+    
     # Update the layout.
     fig.update_layout(
         title="Kaplan-Meier Survival Curves by Industry",
@@ -109,7 +110,7 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=600):
         xaxis=dict(
             range=[0, max_time], tickmode="array", tickvals=xticks, tickangle=-90
         ),
-        yaxis=dict(range=[0, 1], tickmode="linear", dtick=0.1),
+        yaxis=dict(range=[y_lower, 1], tickmode="linear", dtick=0.05, title_standoff=20),
         legend=dict(
             title="Industry", font=dict(size=10), xanchor="right", yanchor="top"
         ),
@@ -213,6 +214,20 @@ def get_survival_plot_component():
                 ], style={"margin": "20px 0"}),
             ], width="auto"),
             dbc.Col([
+                html.Div([
+                    html.Label("Survival lower bound:"),
+                    dcc.Slider(
+                        id="y-lower-slider",
+                        min=0.2,
+                        max=0.9,
+                        step=0.05,
+                        value=0,    # default
+                        marks={i: f"{i:.2f}" for i in np.arange(0, 1, 0.2)},
+                        tooltip={"placement": "bottom", "always_visible": True},
+                    ),
+                ], style={"margin": "20px 0"}),
+            ], width="auto"),
+            dbc.Col([
                 dbc.Button(
                     "Apply",
                     id="apply-button-survival",
@@ -266,15 +281,16 @@ def clear_all(n_clicks):
     Input("apply-button-survival", "n_clicks"),
     State("industry-checklist", "value"),
     State("max-time-slider", "value"),
+    State("y-lower-slider", "value"),
 )
-def update_survival_plot(n_clicks, selected_industries, max_time):
+def update_survival_plot(n_clicks, selected_industries, max_time, y_lower):
     # If no button click yet, show survival curves for default industries.
     if n_clicks is None:
         return plot_kaplan_meier_by_industries(df, industry_list, max_time)
     if not selected_industries:
         # If no industries are selected, return an empty figure with a message.
         return {"data": [], "layout": {"title": "Please select at least one industry."}}
-    return plot_kaplan_meier_by_industries(df, selected_industries, max_time)
+    return plot_kaplan_meier_by_industries(df, selected_industries, max_time, y_lower)
 
 
 # ---------------------
