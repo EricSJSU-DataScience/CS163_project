@@ -30,24 +30,11 @@
 
 <details>
 <summary><strong>Table of Contents</strong></summary>
-<!-- 
-1. [About the Project](#-about-the-project)  
-2. [Pipeline Walk-through](#-pipeline-walk-through)  
-3. [Directory Information](#-directory-information)  
-4. [Environment & Setup](#-environment--setup)  
-5. [Usage ⟶ Run the Pipeline](#-usage⟶run-the-pipeline)  
-6. [Live Website](#-live-website)  
-7. [Roadmap](#-roadmap)  
-8. [Built With](#-built-with)  
-9. [Contact](#-contact)  
-10. [License](#-license) 
--->
 
 1. [About the Project](#-about-the-project) 
 2. [Directory Information](#-directory-information) 
 3. [Initial Data Exploration](#-initial-data-exploration) 
 4. [Visualization of Business Location](#-visualization-of-business-location) 
-<!-- 5. [Data Filtering](#-data-filtering)  -->
 5. [Survival Analysis & Graph](#-survival-analysis--graph) 
 6. [Machine Learning-Based Data Interpretation](#-machine-learning-based-data-interpretation) 
     - [LSTM Model](#-lstm-model) 
@@ -55,9 +42,6 @@
 7. [Website](#-website) 
 
 8. [Environment & Setup](#-environment--setup) 
-<!-- 9. [Usage ⟶ Run the Analysis/Website](#-usage⟶run-the-analysiswebsite)  -->
-<!-- 10. [Roadmap](#-roadmap)  -->
-<!-- 12. [Built With](#-built-with)  -->
 9. [Contact](#-contact)
 
 
@@ -116,6 +100,7 @@ A high-level view from raw data to published site: -->
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
 
 
@@ -188,6 +173,8 @@ For website, the code runs on Google App Engine. The `app.yaml` configuration fi
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
+
+<!-- 
 dataset_la_business_EDA.ipynb
 ---
 
@@ -217,4 +204,4 @@ Business counts are aggregated by NAICS_2_Title to compare sector distributions.
 The Kaplan-Meier estimator is used to plot survival curves, showing the probability of businesses remaining open over time. Survival rates are compared across industries, and log-rank tests statistically validate differences between sectors. The lifelines library facilitates this analysis, revealing insights into which industries exhibit higher resilience or volatility.
 
 8. Boxplots for Duration Analysis
-Boxplots and stripplots are combined to compare business lifespans by open/closed status, with a focus on Retail and Arts sectors. Open businesses generally show longer durations, but outliers—such as very short-lived businesses—highlight the variability within sectors. This step provides a granular view of business sustainability.
+Boxplots and stripplots are combined to compare business lifespans by open/closed status, with a focus on Retail and Arts sectors. Open businesses generally show longer durations, but outliers—such as very short-lived businesses—highlight the variability within sectors. This step provides a granular view of business sustainability. -->
