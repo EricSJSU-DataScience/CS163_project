@@ -5,9 +5,15 @@
   <!-- Optional logo -->
   <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
     <!-- 🚀 -->
-  <h3 align="center">Business Trends </h3>
-  <h3 align="center">& Market Analysis </h3>
-  <h3 align="center">in Los Angeles </h3>
+  <!-- <h3 align="center">Business Trends <br> & Market Analysis <br>in Los Angeles</h3> -->
+
+
+
+  <h3 align="center">
+    <b>Business Trends</b><br> 
+    & <b>Market Analysis</b><br>
+    in <b>Los Angeles</b>
+  </h3>
 
   <p align="center">
     End-to-end analytics &amp; interactive Dash site for exploring the survival patterns of Los Angeles businesses
@@ -38,21 +44,21 @@
 -->
 
 1. [About the Project](#-about-the-project) 
-2. [Initial Data Distribution Analysis](#-initial-data-distribution-analysis) 
-3. [Directory Information](#-directory-information) 
-4. [Geospatial Visualization of Business Distribution](#-geospatial-visualization-of-business-distribution) 
-5. [Data Filtering](#-data-filtering) 
-6. [Survival Probability Analysis & Curve Plotting](#-survival-probability-analysis--curve-plotting) 
-7. [Machine Learning-Based Data Interpretation](#-machine-learning-based-data-interpretation) 
-    - [LSTM Model Application](#-lstm-model-application) 
-    - [Random Survival Forest Analysis](#-random-survival-forest-analysis) 
+2. [Directory Information](#-directory-information) 
+3. [Initial Data Exploration](#-initial-data-exploration) 
+4. [Visualization of Business Location](#-visualization-of-business-location) 
+<!-- 5. [Data Filtering](#-data-filtering)  -->
+5. [Survival Analysis & Graph](#-survival-analysis--graph) 
+6. [Machine Learning-Based Data Interpretation](#-machine-learning-based-data-interpretation) 
+    - [LSTM Model](#-lstm-model) 
+    - [Random Survival Forest Model](#-random-survival-forest-model) 
+7. [Website](#-website) 
 
 8. [Environment & Setup](#-environment--setup) 
-9. [Usage ⟶ Run the Analysis/Website](#-usage⟶run-the-analysiswebsite) 
-10. [Live Website](#-live-website) 
-11. [Roadmap](#-roadmap) 
+<!-- 9. [Usage ⟶ Run the Analysis/Website](#-usage⟶run-the-analysiswebsite)  -->
+<!-- 10. [Roadmap](#-roadmap)  -->
 <!-- 12. [Built With](#-built-with)  -->
-13. [Contact](#-contact)
+9. [Contact](#-contact)
 
 
 </details>
@@ -70,22 +76,16 @@ While building this project we wanted a reproducible, transparent workflow that 
 
 ---
 
-## 🔄 Pipeline Walk-through
-A high-level view from raw data to published site:
+<!-- ## 🔄 Pipeline Walk-through
+A high-level view from raw data to published site: -->
 
-```mermaid
-graph TD
-    A[Data Collection] --> B[Cleaning & EDA Notebooks]
-    B --> C[ML & Survival Models]
-    C --> D[Interactive Dash App]
-    D --> E[Deployment (GCP / PythonAnywhere)]
 
-```
 
 
 
 ## 📁 Directory Information
 
+```
 .
 ├── app_multi_page/            # Dash multipage production site
 ├── app_single_page_styled/    # Lightweight single-page demo
@@ -99,30 +99,75 @@ graph TD
 ├── environment.yml            # Conda env (GPU-ready)
 └── README.md
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Machine Learning-Based Data Interpretation
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## LSTM Model
+---
+## 🔍 Initial Data Exploration
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+---
+
+
+## 🗺️ Visualization of Business Location
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 📊 Survival Analysis & Graph
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+
+
+## 📊 Machine Learning-Based Data Interpretation
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+### 📈 LSTM Model
 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Random Survival Forest
+---
+
+### 📉 Random Survival Forest
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+---
+
+## ⚙️ Environment & Setup
+
+This project is built in Python 3.10, using two main components: Jupyter notebooks (`.ipynb`) for analysis and a Dash/Flask web application (`.py`) to display results. The codebase has minimal dependencies, all listed in `requirements.txt` (Dash, Plotly, pandas, Flask, gunicorn, etc.).
+
+To get started locally, create a new virtual or conda environment and run `pip install -r requirements.txt`. This installs the exact stack required by the notebooks and the WSGI server for the web app. Running `python app.py` launches a local Dash server, enabling real-time iteration on notebooks with immediate updates to the frontend.
+
+For website, the code runs on Google App Engine. The `app.yaml` configuration file sets the runtime to Python 3.10, uses an F2 instance class (memory usage more than 256MB, F1 doesn't work). Deploy updates with termianl command `gcloud app deploy`. 
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
 
 ## 🌐 Website
 
+[Eric's link](https://my-project-cs122-20241114.uw.r.appspot.com/)
+
+[Ruxin's link](https://cs163b.uw.r.appspot.com/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
+---
 
 ## ℹ️ Contact
 
