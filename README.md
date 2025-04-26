@@ -71,25 +71,27 @@ This repository provides data-driven insights into business survival trends in L
 
 ```
 .
-├── app_multi_page/                   # Main Dash multipage application
-├── app_multi_page_styled/            # Production build w/ custom Bootstrap theme
-├── app_single_page_styled/           # Lightweight single-page Dash variant
+├── app_multi_page_styled/            # try build w/ custom Bootstrap theme
+├── app_single_page_styled/           # Bootstrap theme but single-page Dash
+├── appengine/                        # Lightweight multi-page Dash
 ├── dataset/                          # Raw & processed data assets (tracked via Git LFS)
 ├── pic/                              # picture graph plot 
 │
-├── README.md                        # 👉 Project overview, setup & pipeline guide
+├── .gitattributes                    # Track large CSV with Git LFS
+├── README.md                         # 👉 Project overview, setup & pipeline guide
 │
 ├── dataset_business_city_list.ipynb               # City info in map
 ├── dataset_business_naics_code.ipynb              # NAICS info for industry in map
 ├── dataset_business_zipcode_list.ipynb            # Zip info for map
 ├── dataset_la_business.ipynb                      # Initial data cleaning & feature eng.
 ├── dataset_la_business_EDA.ipynb                  # Exploratory data analysis
-├── dataset_la_business_ml.ipynb                   # Machine learning
+├── dataset_la_business_map.ipynb                  # Geographic map
+├── dataset_la_business_ml.ipynb                   # Machine learning LSTM & RSF
+├── dataset_la_business_preview.ipynb              # Dataset Preview
 ├── dataset_la_business_rox.ipynb                  # Ruxin original analysis
-├── dataset_la_business_visualization.ipynb        # Plotly visual drafts
+├── dataset_la_business_visualization.ipynb        # Survival Analysis
 │
 └── requirements.txt                 # Python dependencies for notebooks & app
-└── README.md                        # 👉 Project overview, setup & pipeline guide
 
 ```
 
