@@ -95,7 +95,7 @@ This repository provides data-driven insights into business survival trends in L
 
 ---
 
-
+<!-- data analysis pipline & approach to analyzing idea -->
 ## Pipline Overview
 
 1. Data Collection:
@@ -130,7 +130,7 @@ This repository provides data-driven insights into business survival trends in L
 
 ---
 
-
+<!-- dataset preview & filter -->
 ## 🔍 Initial Data Exploration
 
 The initial exploration (dataset_la_business_preview.ipynb) assessed raw data quality, focusing on identifying missing values, correcting data types (timestamps, categorical fields), and merging NAICS codes, city, and zip-code data. Exploratory checks ensured data consistency and completeness, preparing the dataset for further cleaning and analysis.
@@ -153,7 +153,7 @@ Data cleaning removed two third of records lacking essential information (NAICS 
 
 ---
 
-
+<!-- visualization geomap -->
 ## 🗺️ Visualization of Business Location
 
 Geographic visualization (dataset_la_business_map.ipynb) employed Folium to plot business locations across Los Angeles County based on latitude and longitude, offering an interactive overview of active and closed businesses. Key geospatial insights include:
@@ -209,13 +209,12 @@ Long Short-Term Memory (LSTM) model was employed due to its effectiveness in mod
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-A Random Survival Forest (RSF) models business time‑to‑closure while naturally handling censored, still‑open cases. Trained on start year/month, council district, and 2‑digit NAICS sector for ~500 k cleaned records.
-
-
 ---
 
 <!-- Random Survival Forest -->
 ### Random Survival Forest Model
+
+A Random Survival Forest (RSF) models business time‑to‑closure while naturally handling censored, still‑open cases. Trained on start year/month, council district, and 2‑digit NAICS sector for ~500 k cleaned records.
 
 
 
