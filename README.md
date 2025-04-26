@@ -18,11 +18,13 @@
   <p align="center">
     End-to-end analytics &amp; interactive Dash site for exploring the survival patterns of Los Angeles businesses
     <br />
-    <a href="<!-- ✍️ TODO: GitHub repo link -->"><strong>Explore the repo »</strong></a>
+    <a href="https://github.com/EricSJSU-DataScience/CS163_project"><strong>Explore the repo</strong></a>
+    <!-- 
     ·
-    <a href="<!-- ✍️ TODO: issue link -->">Report Bug</a>
+    <a href="about:blank">Report Bug</a>
     ·
-    <a href="<!-- ✍️ TODO: issue link -->">Request Feature</a>
+    <a href="about:blank">Request Feature</a> 
+    -->
   </p>
 </div>
 
@@ -32,17 +34,17 @@
 <summary><strong>Table of Contents</strong></summary>
 
 1. [About the Project](#-about-the-project) 
-2. [Directory Information](#-directory-information) 
-3. [Initial Data Exploration](#-initial-data-exploration) 
-4. [Visualization of Business Location](#-visualization-of-business-location) 
-5. [Survival Analysis & Graph](#-survival-analysis--graph) 
-6. [Machine Learning-Based Data Interpretation](#-machine-learning-based-data-interpretation) 
+2. [Pipline Overview](#-pipline-overview)
+3. [Directory Information](#-directory-information) 
+4. [Initial Data Exploration](#-initial-data-exploration) 
+5. [Visualization of Business Location](#-visualization-of-business-location) 
+6. [Survival Analysis & Graph](#-survival-analysis--graph) 
+7. [Machine Learning-Based Data Interpretation](#-machine-learning-based-data-interpretation) 
     - [LSTM Model](#-lstm-model) 
     - [Random Survival Forest Model](#-random-survival-forest-model) 
-7. [Website](#-website) 
-
 8. [Environment & Setup](#-environment--setup) 
-9. [Contact](#-contact)
+9. [Website](#-website) 
+10. [Contact](#-contact)
 
 
 </details>
@@ -52,21 +54,17 @@
 
 ---
 
-## 📑 About the Project
-<!-- ✍️ TODO: 2-3 sentence elevator pitch (What/Why/Outcome). -->
-Launching a small business in Los Angeles can feel like flying blind: public data on where companies succeed or fail is plentiful, but it’s scattered across open-data portals and wrapped in jargon like “NAICS” codes, making it hard for first-time owners to act on. Our project turns that raw information into clear, personalized guidance. By mining city-wide licensing records we estimate survival probabilities by industry and location (district-level coordinates), then surface the results in an interactive Dash web app. A prospective owner can explore questions such as “What’s the three-year closure risk for cafés in Koreatown versus Santa Monica?” or “How long do auto-repair shops typically survive city-wide?”—and receive data-backed recommendations before signing a lease or drafting a business plan.
 
-In short, we bridge the gap between complex municipal datasets and everyday decision-making, giving entrepreneurs a sharper picture of where to open, what industry risks look like, and how those factors translate into real-world failure probabilities and start-up budgeting.
+## 📑 About the Project
+
+This repository provides data-driven insights into business survival trends in Los Angeles, leveraging municipal government data to estimate closure risks by factor such as industry and location. The project includes a Dash web app for interactive exploration, enabling users to query survival probabilities for specific business types and zoomable map to show same business types in the neighborhoods for location selection.
+
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
-
-<!-- ## 🔄 Pipeline Walk-through
-A high-level view from raw data to published site: -->
-
-
-
 
 
 ## 📁 Directory Information
@@ -96,7 +94,59 @@ A high-level view from raw data to published site: -->
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
+
+
+## Pipline Overview
+
+1. Data Collection:
+    - Active and closed business records from [Los Angeles Open Data Portal](https://data.lacity.org/Administration-Finance/Listing-of-All-Businesses/r4uk-afju/about_data)
+    - [NAICS codes for industry classification](https://www.naics.com/search/#naics) (`dataset_business_naics_code.ipynb`)
+    - [City information](https://en.wikipedia.org/wiki/List_of_cities_in_Los_Angeles_County,_California) (`dataset_business_city_list.ipynb`)
+    - [Zip code information](https://www.laalmanac.com/communications/cm02_communities.php) (`dataset_business_zipcode_list.ipynb`)
+
+2. Data Preview (`dataset_la_business_preview.ipynb`):
+    - inspect missing value
+    - parse columns correct data type
+    - append info between data source
+    - inspect data/record correction
+
+3. Data Cleaning & Filtering
+
+4. Exploratory Analysis:
+    - Survival curves (`dataset_la_business_visulization.ipynb`)
+    - Geographic map (`dataset_la_business_map.ipynb`)
+
+5. Machine Learning (`dataset_la_business_ml.ipynb`):
+    - LSTM for time-series forecasting
+    - Random Survival Forests for risk prediction
+
+6. Dashboard Development (`appengine/`):
+    - Build interactive visualizations with Plotly/Dash.
+    - Deploy on Google App Engine
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+
 ## 🔍 Initial Data Exploration
+
+The initial exploration (dataset_la_business_preview.ipynb) assessed raw data quality, focusing on identifying missing values, correcting data types (timestamps, categorical fields), and merging NAICS codes, city, and zip-code data. Exploratory checks ensured data consistency and completeness, preparing the dataset for further cleaning and analysis.
+
+The dataset includes 1.5 millions Los Angeles business records with 16 features, covering identifiers, locations, NAICS codes, and operational periods. Key findings include:
+
+- Temporal Trends: Rapid growth since 1990.
+
+- Data Quality Issues: High missingness in  columns (DBA NAME, MAILING ADDRESS, ignore columns information).
+
+- Date Processing: parsed LOCATION START DATE ; 990k records have end dates.
+
+- Data Append: NAICS codes mapped to industry titles.
+
+Data cleaning removed two third of records lacking essential information (NAICS codes or start dates), resulting in approx 600k usable records for later analytical process.
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -106,33 +156,54 @@ A high-level view from raw data to published site: -->
 
 ## 🗺️ Visualization of Business Location
 
+Geographic visualization (dataset_la_business_map.ipynb) employed Folium to plot business locations across Los Angeles County based on latitude and longitude, offering an interactive overview of active and closed businesses. Key geospatial insights include:
+
+- Density Hotspots: based on different industry code, map show area businesses density
+
+- City List: additional city list information did **not** append to business dataset well.
+
+- Zip Code: additional zip code list information did **not** append to business dataset well.
+
+- Fitler dataset decision: based on the coordinate range to filter records outside LA area.
+
+Data filtering optimized visualization by focusing on valid geographic coordinates, utilizing the efficient FastMarkerCluster() instead of the slower MarkerCluster(). The interactive maps intuitively inform entrepreneurs and policymakers about strategic business locations and economic trends.
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
-## 📊 Survival Analysis & Graph
+## 📉 Survival Analysis & Graph
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
 
-
+<!-- Machine Learning -->
 ## 📊 Machine Learning-Based Data Interpretation
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
----
-
-### 📈 LSTM Model
-
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
-### 📉 Random Survival Forest
+<!-- Long Short Term Memory -->
+### LSTM Model
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+<!-- Random Survival Forest -->
+### Random Survival Forest Model
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
