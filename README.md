@@ -78,7 +78,7 @@ This repository provides data-driven insights into business survival trends in L
 ├── pic/                              # picture graph plot 
 │
 ├── .gitattributes                    # Track large CSV with Git LFS
-├── README.md                         # 👉 Project overview, setup & pipeline guide
+├── README.md                         # Project overview, setup & pipeline guide
 │
 ├── dataset_business_city_list.ipynb               # City info in map
 ├── dataset_business_naics_code.ipynb              # NAICS info for industry in map
