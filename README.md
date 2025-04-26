@@ -89,7 +89,6 @@ A high-level view from raw data to published site: -->
 .
 ├── app_multi_page/                   # Main Dash multipage application
 ├── app_multi_page_styled/            # Production build w/ custom Bootstrap theme
-├── app_multi_page_styled_example/    # Minimal demo of the styled layout
 ├── app_single_page_styled/           # Lightweight single-page Dash variant
 ├── dataset/                          # Raw & processed data assets (tracked via Git LFS)
 ├── pic/                              # picture graph plot 
