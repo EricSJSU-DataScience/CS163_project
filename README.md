@@ -70,7 +70,9 @@
 
 ## 📑 About the Project
 <!-- ✍️ TODO: 2-3 sentence elevator pitch (What/Why/Outcome). -->
-While building this project we wanted a reproducible, transparent workflow that takes raw LA business license data all the way to an interactive Kaplan-Meier dashboard.
+Launching a small business in Los Angeles can feel like flying blind: public data on where companies succeed or fail is plentiful, but it’s scattered across open-data portals and wrapped in jargon like “NAICS” codes, making it hard for first-time owners to act on. Our project turns that raw information into clear, personalized guidance. By mining city-wide licensing records we estimate survival probabilities by industry and location (district-level coordinates), then surface the results in an interactive Dash web app. A prospective owner can explore questions such as “What’s the three-year closure risk for cafés in Koreatown versus Santa Monica?” or “How long do auto-repair shops typically survive city-wide?”—and receive data-backed recommendations before signing a lease or drafting a business plan.
+
+In short, we bridge the gap between complex municipal datasets and everyday decision-making, giving entrepreneurs a sharper picture of where to open, what industry risks look like, and how those factors translate into real-world failure probabilities and start-up budgeting.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
