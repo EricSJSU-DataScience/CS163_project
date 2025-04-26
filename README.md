@@ -87,17 +87,24 @@ A high-level view from raw data to published site: -->
 
 ```
 .
-├── app_multi_page/            # Dash multipage production site
-├── app_single_page_styled/    # Lightweight single-page demo
-├── dataset/                   # Raw & curated data assets
-├── notebooks/                 # Jupyter notebooks for EDA & modeling
-│   ├── dataset_la_business.ipynb
-│   ├── dataset_la_business_EDA.ipynb
-│   └── ...
-├── models/                    # Saved *.keras & joblib artefacts
-├── requirements.txt           # Python deps (pip)
-├── environment.yml            # Conda env (GPU-ready)
-└── README.md
+├── app_multi_page/                   # Main Dash multipage application
+├── app_multi_page_styled/            # Production build w/ custom Bootstrap theme
+├── app_multi_page_styled_example/    # Minimal demo of the styled layout
+├── app_single_page_styled/           # Lightweight single-page Dash variant
+├── dataset/                          # Raw & processed data assets (tracked via Git LFS)
+├── pic/                              # picture graph plot 
+│
+├── dataset_business_city_list.ipynb               # City info in map
+├── dataset_business_naics_code.ipynb              # NAICS info for industry in map
+├── dataset_business_zipcode_list.ipynb            # Zip info for map
+├── dataset_la_business.ipynb                      # Initial data cleaning & feature eng.
+├── dataset_la_business_EDA.ipynb                  # Exploratory data analysis
+├── dataset_la_business_ml.ipynb                   # Machine learning
+├── dataset_la_business_rox.ipynb                  # Ruxin original analysis
+├── dataset_la_business_visualization.ipynb        # Plotly visual drafts
+│
+├── requirements.txt                 # Python dependencies for notebooks & app
+└── README.md                        # 👉 Project overview, setup & pipeline guide
 
 ```
 
