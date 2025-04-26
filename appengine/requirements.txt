@@ -1,0 +1,8 @@
+dash
+dash-bootstrap-components
+plotly
+pandas
+Flask
+folium
+gunicorn
+google-cloud-storage
