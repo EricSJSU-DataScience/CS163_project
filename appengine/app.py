@@ -30,10 +30,10 @@ app.layout = html.Div([
     dbc.NavbarSimple(
         children=[
             dbc.NavItem(dcc.Link("Home", href="/", className="nav-link")),
-	    dbc.NavItem(dcc.Link("Dataset", href="/dataset", className="nav-link")),
+	        dbc.NavItem(dcc.Link("Dataset", href="/dataset", className="nav-link")),
             dbc.NavItem(dcc.Link("Visualization", href="/visualization", className="nav-link")),
             dbc.NavItem(dcc.Link("Map Dashboard", href="/map", className="nav-link")),
-	    dbc.NavItem(dcc.Link("KM Survival Curve", href="/survival", className="nav-link")),
+	        dbc.NavItem(dcc.Link("KM Survival Curve", href="/survival", className="nav-link")),
             dbc.NavItem(dcc.Link("ML Analysis", href="/ml", className="nav-link")),
             dbc.NavItem(dcc.Link("About", href="/about", className="nav-link")),
         ],
