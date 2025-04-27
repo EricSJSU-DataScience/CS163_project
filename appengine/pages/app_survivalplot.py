@@ -11,7 +11,10 @@ import time
 time_start = time.time()
 # business_filtered.csv
 url = "https://media.githubusercontent.com/media/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_filtered.csv"
-df = pd.read_csv(url, usecols=["NAICS", "is_open", "duration"])
+url_1980 = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_filtered_1980after.csv"
+url_2000 = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_filtered_2000after.csv"
+
+df = pd.read_csv(url_2000, usecols=["NAICS", "is_open", "duration"])
 df["NAICS-2"] = df["NAICS"].map(lambda n: int(n / 10000))
 # NAICS info csv
 naics_file = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/naics_2_clean.csv"
