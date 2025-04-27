@@ -1,2 +1,3 @@
 *.pyc
 *.pyc
+/appengine/pages/__pycache__
