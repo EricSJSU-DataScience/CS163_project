@@ -1,12 +1,15 @@
 import dash
-from dash import html, dcc, callback, Input, Output
+from dash import html, dcc, callback
+from dash.dependencies import Input, Output, State
+import dash_bootstrap_components as dbc
 import pandas as pd
 import folium
-from folium.plugins import MarkerCluster, FastMarkerCluster
+from folium.plugins import FastMarkerCluster
 import time
+from dash import no_update
 
-# Register this file as a Dash page.
-dash.register_page(__name__, path='/geomap4', name='Business Map Dashboard')
+
+
 
 # ---------------------
 # Step 1. Data Loading
@@ -15,106 +18,180 @@ time_start = time.time()
 url = 'https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_subset.csv'
 df_preworked = pd.read_csv(url, dtype={"NAICS": "Int64"})
 time_end = time.time()
-print(f'Data Loading completed! Time: {(time_end - time_start): .1f} second')
+print(f'geomap\t\tdata Loading completed!\tTime: {(time_end - time_start): .1f} second')
+
+# ---------------------
+# dictionary of NAICS 2-digits information
+# ---------------------
+code_sector_dict = {11: 'Agriculture, Forestry, Fishing and Hunting',
+                    21: 'Mining',
+                    22: 'Utilities',
+                    23: 'Construction',
+                    31: 'Manufacturing',
+                    32: 'Manufacturing',
+                    33: 'Manufacturing',
+                    42: 'Wholesale Trade',
+                    44: 'Retail Trade',
+                    45: 'Retail Trade',
+                    48: 'Transportation and Warehousing',
+                    49: 'Transportation and Warehousing',
+                    51: 'Information',
+                    52: 'Finance and Insurance',
+                    53: 'Real Estate Rental and Leasing',
+                    54: 'Professional, Scientific, and Technical Services',
+                    55: 'Management of Companies and Enterprises',
+                    56: 'Administrative and Support and Waste… Services',
+                    61: 'Educational Services',
+                    62: 'Health Care and Social Assistance',
+                    71: 'Arts, Entertainment, and Recreation',
+                    72: 'Accommodation and Food Services',
+                    81: 'Other Services (except Public Administration)',
+                    92: 'Public Administration'}
 
 # ---------------------
 # Compute Zip Counts for Filter Dropdown
 # ---------------------
-st = time.time()
-df_preworked['5d_zip'] = df_preworked['5d_zip'].astype(str).str.split('-').str[0].str.strip()
-zip_counts = df_preworked['5d_zip'].value_counts().to_dict()
-zip_options = [{"label": f"{zip_code} ({zip_counts[zip_code]})", "value": zip_code}
-               for zip_code in sorted(zip_counts.keys())]
-# default_zip = "90012"
-# default_zips = [option["value"] for option in zip_options]  # Default to all zip codes
-default_zips = ["90001", "90002", "90003", "90004", "90005"]
-et = time.time()
-print(f'Zip code processing: {et - st: 0.1f} seconds')
+naics_counts = df_preworked['NAICS-2'].value_counts().to_dict()
+naics_options = [
+    {"label": f"{code} - {code_sector_dict.get(code, 'Unknown')} ({naics_counts.get(code, 0)})", "value": code}
+    for code in sorted(naics_counts.keys())
+]
+default_sectors = sorted(naics_counts.keys())
+
 # ---------------------
-# Function to Build Folium Map for a Given Zip Code
+# Function to Build Folium Map for a Given NAICS Sector Code
 # ---------------------
-def create_map(selected_zip):
+def create_map_naics(selected_sector):
     st = time.time()
-    df_filtered = df_preworked[df_preworked['5d_zip'].isin(selected_zip)].copy()
-    
-    # if 'LOCATION' in df_filtered.columns:
-    #     df_filtered['LOCATION'] = df_filtered['LOCATION'].str.strip('()')
-    #     df_filtered[['latitude', 'longitude']] = df_filtered['LOCATION'].str.split(', ', expand=True)
-    #     df_filtered['latitude'] = pd.to_numeric(df_filtered['latitude'], errors='coerce')
-    #     df_filtered['longitude'] = pd.to_numeric(df_filtered['longitude'], errors='coerce')
-    #     df_filtered = df_filtered.dropna(subset=['latitude', 'longitude'])
-    
+    # Filter businesses based on the selected NAICS-2 sector codes
+    df_filtered = df_preworked[df_preworked['NAICS-2'].isin(selected_sector)].copy()
     map_center = [34.05525, -118.23737]
-    business_map = folium.Map(location=map_center, zoom_start=10)
-    # marker_cluster = MarkerCluster().add_to(business_map)
-    # for _, row in df_filtered.iterrows():
-    #     folium.Marker(
-    #         location=[row['latitude'], row['longitude']],
-    #         popup=folium.Popup(f"{row['BUSINESS NAME']}<br>{row['STREET ADDRESS']}", max_width=250),
-    #         icon=folium.Icon(color='blue', icon='info-sign')
-    #     ).add_to(marker_cluster)
+    # scrollWheelZoom=True -> Map can zoom by middle wheel
+    business_map = folium.Map(location=map_center, zoom_start=10, scrollWheelZoom=False)
     points = df_filtered[['latitude', 'longitude']].values.tolist()
     FastMarkerCluster(points).add_to(business_map)
     et = time.time()
-    print(f'Funtion create_map: {(et - st): 0.1f} seconds')
+    print(f'geomap\t\tFunction create_map: {(et - st): 0.1f} seconds')
     return business_map._repr_html_()
 
-# def create_map(selected_zip):
-#     if selected_zip in map_cache:
-#         return map_cache[selected_zip]
-    
-#     df_filtered = df_preworked[df_preworked['5d_zip'] == selected_zip].copy()
-#     map_center = [34.05525, -118.23737]
-#     business_map = folium.Map(location=map_center, zoom_start=12)
-#     marker_cluster = MarkerCluster().add_to(business_map)
-    
-#     for _, row in df_filtered.iterrows():
-#         folium.Marker(
-#             location=[row['latitude'], row['longitude']],
-#             popup=folium.Popup(f"{row['BUSINESS NAME']}<br>{row['STREET ADDRESS']}", max_width=250),
-#             icon=folium.Icon(color='blue', icon='info-sign')
-#         ).add_to(marker_cluster)
-        
-#     map_html = business_map._repr_html_()
-#     map_cache[selected_zip] = map_html
-#     return map_html
+# ---------------------
+# Define the layout for the map component
+# ---------------------
+def get_map_component():
+    return html.Div([
+        html.H3("Business Map Dashboard"),
+        dbc.Row([
+            dbc.Col([
+                html.Div([
+                    dbc.Button(
+                        "Select NAICS Sectors",
+                        id="open-collapse",
+                        color="primary",
+                        className="mb-2",
+                    ),
+                    dbc.Collapse(
+                        dbc.Card(
+                            dbc.CardBody([
+                                dbc.Row([
+                                    dbc.Col(
+                                        html.Div("Pick one or more NAICS Sectors:"),
+                                        width="auto"
+                                    ),
+                                    dbc.Col(
+                                        # Clear Button
+                                        dbc.Button(
+                                            "Clear",
+                                            id="clear-button",
+                                            color="secondary",
+                                            style={
+                                                "height": "20px",
+                                                "width": "60px",
+                                                "fontSize": "10px",
+                                                "padding": "0px 4px"
+                                            },
+                                            className="mt-2"
+                                        ),
+                                        width="auto"
+                                    )
+                                ], justify="start", align="center"),
+                                dcc.Checklist(
+                                    id="sector-checklist",
+                                    options=naics_options,
+                                    value=[11],  # Default selection
+                                    labelStyle={"display": "block"},
+                                ),
+                            ])
+                        ),
+                        id="collapse-checklist",
+                        is_open=False,
+                        style={
+                            "position": "absolute",
+                            "top": "60px", 
+                            "left": "-50px",
+                            "zIndex": "999",
+                            "width": "550px"
+                        },
+                    ),
+                ], style={"position": "relative", "display": "inline-block"}),
+            ], width="auto"),
+            dbc.Col([
+                dbc.Button(
+                    "Apply",
+                    id="apply-button",
+                    color="primary",
+                    style={
+                        "height": "36px",
+                        "width": "100px",
+                        "fontSize": "10px",
+                        "padding": "2px 4px",
+                    },
+                    className="mt-2 ml-2",
+                ),
+            ], width="auto"),
+        ], justify="center", align="center"),
+        # html.Div("Map View:", style={"marginTop": 20}),
+        html.Iframe(id="map", style={"width": "100%", "height": "600px", "border": "none"})
+    ])
 
-# def create_map(selected_zip):
-#     df_filtered = df_preworked[df_preworked['5d_zip'] == selected_zip].copy()
-#     map_center = [34.05525, -118.23737]
-#     business_map = folium.Map(location=map_center, zoom_start=12)
-    
-#     # Prepare list of points
-#     points = df_filtered[['latitude', 'longitude']].dropna().values.tolist()
-#     FastMarkerCluster(points).add_to(business_map)
-    
-#     return business_map._repr_html_()
 
 # ---------------------
-# Define the layout for the page
+# Callback to update the map
 # ---------------------
-layout = html.Div([
-    html.H1("Business Map Dashboard"),
-    html.Div("Select a zip code to filter the displayed businesses:"),
-    dcc.Dropdown(
-        id="zip-dropdown",
-        options=zip_options,
-        value=default_zips,
-        multi=True,
-        placeholder="Select zip codes...",
-        clearable=False
-    ),
-    html.Hr(),
-    html.Div("Map View:", style={"marginTop": 20}),
-    html.Iframe(id="map", style={"width": "100%", "height": "600px", "border": "none"})
-])
 
-# ---------------------
-# Callback to update the map based on selected zip code
-# ---------------------
+# Callback to toggle the collapsible container
+@callback(
+    Output("collapse-checklist", "is_open"),
+    Input("open-collapse", "n_clicks"),
+    State("collapse-checklist", "is_open")
+)
+def toggle_collapse(n_clicks, is_open):
+    if n_clicks:
+        return not is_open
+    return is_open
+
+# Callback to clear selections
+@callback(
+    Output("sector-checklist", "value"),
+    Input("clear-button", "n_clicks")
+)
+def clear_all(n_clicks):
+    if n_clicks:
+        return []
+    return no_update
+
+# Callback to apply selections
 @callback(
     Output("map", "srcDoc"),
-    Input("zip-dropdown", "value")
+    Input("apply-button", "n_clicks"),
+    State("sector-checklist", "value")
 )
-def update_map(selected_zip):
-    return create_map(selected_zip)
+def update_map(n_clicks, selected_sectors):
+    # On initial load, display the map based on the default sectors.
+    if n_clicks is None:
+        return create_map_naics(default_sectors)
+    if not selected_sectors:
+        return "<h4>Please select at least one NAICS sector.</h4>"
+    return create_map_naics(selected_sectors)
+
+# Export the map_layout
+map_layout = get_map_component()

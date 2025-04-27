@@ -1,48 +1,143 @@
 import dash
 from dash import html, dcc
-import dash_bootstrap_components as dbc  # Optional if you want to use additional Bootstrap components
+import dash_bootstrap_components as dbc
 
-# Use the external resources from your example app.py
+
+# Define the paths to local CSS and JS files
 external_stylesheets = [
     "/assets/css/bootstrap.min.css",
     "/assets/css/all.min.css"
 ]
+
 external_scripts = [
     "/assets/js/jquery-3.5.1.slim.min.js",
     "/assets/js/popper.min.js",
     "/assets/js/bootstrap.min.js"
 ]
 
-# Initialize the Dash app with multi-page support
+# Initialize the Dash app with local resources
 app = dash.Dash(
     __name__,
     use_pages=True,
     external_stylesheets=external_stylesheets,
-    external_scripts=external_scripts,
-    suppress_callback_exceptions=True
+    external_scripts=external_scripts
 )
+
 server = app.server
 
-# Build the navigation bar based on dash.page_registry
 nav_items = []
 for page in dash.page_registry.values():
     nav_items.append(
         html.Li(
-            dcc.Link(
+            className="nav-item",
+            children=dcc.Link(
                 page["name"],
                 href=page["relative_path"],
-                className="nav-link js-scroll-trigger"
+                className="nav-link"
             ),
-            className="nav-item"
         )
     )
 
-
 app.layout = html.Div([
-    # Navigation bar
+    # # Navigation bar
+    # html.Nav(
+    #     id="mainNav",
+    #     className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",  # Changed to dark theme
+    #     children=[
+    #         html.Div(
+    #             className="container",
+    #             children=[
+    #                 html.A(
+    #                     "Los Angeles Business Trends", 
+    #                     className="navbar-brand", 
+    #                     href="/"
+    #                 ),
+    #                 html.Button(
+    #                     className="navbar-toggler",
+    #                     type="button",
+    #                     **{
+    #                         "data-toggle": "collapse",
+    #                         "data-target": "#navbarResponsive",
+    #                         "aria-controls": "navbarResponsive",
+    #                         "aria-expanded": "false",
+    #                         "aria-label": "Toggle navigation",
+    #                     },
+    #                     children=[html.I(className="fas fa-bars")]
+    #                 ),
+    #                 html.Div(
+    #                     className="collapse navbar-collapse",
+    #                     id="navbarResponsive",
+    #                     children=html.Ul(
+    #                         className="navbar-nav ml-auto",
+    #                         children=[
+    #                             html.Li(
+    #                                 className="nav-item",
+    #                                 children=dcc.Link(
+    #                                     "Home",
+    #                                     className="nav-link",
+    #                                     href="/",
+    #                                 ),
+    #                             ),
+    #                             html.Li(
+    #                                 className="nav-item",
+    #                                 children=dcc.Link(
+    #                                     "Dataset",
+    #                                     className="nav-link",
+    #                                     href="/dataset",
+    #                                 ),
+    #                             ),
+    #                             html.Li(
+    #                                 className="nav-item",
+    #                                 children=dcc.Link(
+    #                                     "Visualization",
+    #                                     className="nav-link",
+    #                                     href="/visualization",
+    #                                 ),
+    #                             ),
+    #                             html.Li(
+    #                                 className="nav-item",
+    #                                 children=dcc.Link(
+    #                                     "Map Dashboard",
+    #                                     className="nav-link",
+    #                                     href="/map",
+    #                                 ),
+    #                             ),
+    #                             html.Li(
+    #                                 className="nav-item",
+    #                                 children=dcc.Link(
+    #                                     "KM Survival Curve",
+    #                                     className="nav-link",
+    #                                     href="/survival",
+    #                                 ),
+    #                             ),
+    #                             html.Li(
+    #                                 className="nav-item",
+    #                                 children=dcc.Link(
+    #                                     "ML Analysis",
+    #                                     className="nav-link",
+    #                                     href="/ml",
+    #                                 ),
+    #                             ),
+    #                             html.Li(
+    #                                 className="nav-item",
+    #                                 children=dcc.Link(
+    #                                     "About",
+    #                                     className="nav-link",
+    #                                     href="/about",
+    #                                 ),
+    #                             ),
+    #                         ],
+    #                     ),
+    #                 ),
+    #             ],
+    #         )
+    #     ],
+    # ),
+
+    # # Navigation bar
     html.Nav(
         id="mainNav",
-        className="navbar navbar-expand-lg navbar-light fixed-top",
+        className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",
         children=[
             html.Div(
                 className="container",
@@ -66,38 +161,35 @@ app.layout = html.Div([
                     html.Div(
                         className="collapse navbar-collapse",
                         id="navbarResponsive",
-                        children=html.Ul(nav_items, className="navbar-nav ml-auto")
+                        children=html.Ul(
+                            className="navbar-nav ml-auto",
+                            children=nav_items,
+                            
+                        )
                     )
                 ]
             )
         ]
     ),
 
-    # Header Section (Masthead)
-    html.Header(
-        className="masthead",
-        children=html.Div(
-            className="container d-flex h-100 align-items-center",
-            children=html.Div(
-                className="mx-auto text-center",
-                children=[
-                    html.H1("Business\n Trends and Market\n Analysis"),
-                    # html.H2("Data-Driven Insights and Interactive Visualizations"),
-                    html.A("Learn More", className="btn btn-primary js-scroll-trigger", href="/")
-                ]
-            )
-        )
+    html.Div(
+        id="page-content",
+        style={"padding-top": "140px"},  # Adjust based on your navbar height
+        children=[
+            # All your page content goes here
+            dash.page_container 
+        ]
     ),
 
-    # Content container for page content (renders pages registered via Dash)
-    html.Div(dash.page_container),
-
-    # Footer Section
+    # # Footer Section
     html.Footer(
         className="bg-black small text-center text-white-50",
         children=html.Div("SJSU CS163")
     )
+    
 ])
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run_server(debug=True)
+
+
