@@ -14,7 +14,7 @@ url = "https://media.githubusercontent.com/media/EricSJSU-DataScience/CS163_proj
 url_1980 = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_filtered_1980after.csv"
 url_2000 = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/business_filtered_2000after.csv"
 
-df = pd.read_csv(url_2000, usecols=["NAICS", "is_open", "duration"])
+df = pd.read_csv(url_1980, usecols=["NAICS", "is_open", "duration"])
 df["NAICS-2"] = df["NAICS"].map(lambda n: int(n / 10000))
 # NAICS info csv
 naics_file = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/refs/heads/main/dataset/naics_2_clean.csv"
@@ -28,7 +28,7 @@ print(f"survivalplot\tdata Loading completed!\tTime: {(time_end - time_start): .
 # ---------------------
 # Function Definitions
 # ---------------------
-def plot_kaplan_meier_by_industries(df, industries, max_time=600, y_lower=0.2):
+def plot_kaplan_meier_by_industries(df, industries, max_time=240, y_lower=0.4):
     """
     Computes and returns a Plotly figure with Kaplan-Meier survival curves for multiple industries.
 
@@ -207,11 +207,11 @@ def get_survival_plot_component():
                     html.Label("Max Duration (Months):"),
                     dcc.Slider(
                         id="max-time-slider",
-                        min=120,
-                        max=720,
+                        min=60,
+                        max=360,
                         step=12,
-                        value=600,
-                        marks={i: str(i) for i in range(0, 1201, 120)},
+                        value=240,
+                        marks={i: str(i) for i in range(0, 1201, 60)},
                         tooltip={"placement": "bottom", "always_visible": True},
                     ),
                 ], style={"margin": "20px 0"}),
@@ -224,7 +224,7 @@ def get_survival_plot_component():
                         min=0.2,
                         max=0.9,
                         step=0.05,
-                        value=0,    # default
+                        value=0.4,    # default
                         marks={i: f"{i:.2f}" for i in np.arange(0, 1, 0.2)},
                         tooltip={"placement": "bottom", "always_visible": True},
                     ),
