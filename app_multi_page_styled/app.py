@@ -12,7 +12,8 @@ external_stylesheets = [
 external_scripts = [
     "/assets/js/jquery-3.5.1.slim.min.js",
     "/assets/js/popper.min.js",
-    "/assets/js/bootstrap.min.js"
+    "/assets/js/bootstrap.min.js",
+    'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML',
 ]
 
 # Initialize the Dash app with local resources
@@ -38,101 +39,41 @@ for page in dash.page_registry.values():
         )
     )
 
+# PAGE_ORDER = [
+#     "Home",
+#     "Dataset",
+#     "Visualization",
+#     "Map Dashboard",
+#     "KM Survival Curve",
+#     "ML Analysis",
+#     "About"
+# ]
+
+# def get_page_order(page_name):
+#     try:
+#         return PAGE_ORDER.index(page_name)
+#     except ValueError:
+#         return len(PAGE_ORDER) + 1  # Put unspecified pages at the end
+
+# nav_items = []
+# sorted_pages = sorted(
+#     dash.page_registry.values(),
+#     key=lambda page: get_page_order(page["name"])
+# )
+
+# for page in sorted_pages:
+#     nav_items.append(
+#         html.Li(
+#             className="nav-item",
+#             children=dcc.Link(
+#                 page["name"],
+#                 href=page["relative_path"],
+#                 className="nav-link"
+#             )
+#         )
+#     )
+
 app.layout = html.Div([
-    # # Navigation bar
-    # html.Nav(
-    #     id="mainNav",
-    #     className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",  # Changed to dark theme
-    #     children=[
-    #         html.Div(
-    #             className="container",
-    #             children=[
-    #                 html.A(
-    #                     "Los Angeles Business Trends", 
-    #                     className="navbar-brand", 
-    #                     href="/"
-    #                 ),
-    #                 html.Button(
-    #                     className="navbar-toggler",
-    #                     type="button",
-    #                     **{
-    #                         "data-toggle": "collapse",
-    #                         "data-target": "#navbarResponsive",
-    #                         "aria-controls": "navbarResponsive",
-    #                         "aria-expanded": "false",
-    #                         "aria-label": "Toggle navigation",
-    #                     },
-    #                     children=[html.I(className="fas fa-bars")]
-    #                 ),
-    #                 html.Div(
-    #                     className="collapse navbar-collapse",
-    #                     id="navbarResponsive",
-    #                     children=html.Ul(
-    #                         className="navbar-nav ml-auto",
-    #                         children=[
-    #                             html.Li(
-    #                                 className="nav-item",
-    #                                 children=dcc.Link(
-    #                                     "Home",
-    #                                     className="nav-link",
-    #                                     href="/",
-    #                                 ),
-    #                             ),
-    #                             html.Li(
-    #                                 className="nav-item",
-    #                                 children=dcc.Link(
-    #                                     "Dataset",
-    #                                     className="nav-link",
-    #                                     href="/dataset",
-    #                                 ),
-    #                             ),
-    #                             html.Li(
-    #                                 className="nav-item",
-    #                                 children=dcc.Link(
-    #                                     "Visualization",
-    #                                     className="nav-link",
-    #                                     href="/visualization",
-    #                                 ),
-    #                             ),
-    #                             html.Li(
-    #                                 className="nav-item",
-    #                                 children=dcc.Link(
-    #                                     "Map Dashboard",
-    #                                     className="nav-link",
-    #                                     href="/map",
-    #                                 ),
-    #                             ),
-    #                             html.Li(
-    #                                 className="nav-item",
-    #                                 children=dcc.Link(
-    #                                     "KM Survival Curve",
-    #                                     className="nav-link",
-    #                                     href="/survival",
-    #                                 ),
-    #                             ),
-    #                             html.Li(
-    #                                 className="nav-item",
-    #                                 children=dcc.Link(
-    #                                     "ML Analysis",
-    #                                     className="nav-link",
-    #                                     href="/ml",
-    #                                 ),
-    #                             ),
-    #                             html.Li(
-    #                                 className="nav-item",
-    #                                 children=dcc.Link(
-    #                                     "About",
-    #                                     className="nav-link",
-    #                                     href="/about",
-    #                                 ),
-    #                             ),
-    #                         ],
-    #                     ),
-    #                 ),
-    #             ],
-    #         )
-    #     ],
-    # ),
 
     # # Navigation bar
     html.Nav(
@@ -142,7 +83,7 @@ app.layout = html.Div([
             html.Div(
                 className="container",
                 children=[
-                    html.A("LA Area", className="navbar-brand", href="/"),
+                    html.A("Los Angeles Business", className="navbar-brand", href="/"),
                     html.Button(
                         className="navbar-toggler navbar-toggler-right",
                         type="button",
@@ -164,7 +105,6 @@ app.layout = html.Div([
                         children=html.Ul(
                             className="navbar-nav ml-auto",
                             children=nav_items,
-                            
                         )
                     )
                 ]
