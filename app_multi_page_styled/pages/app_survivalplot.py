@@ -28,7 +28,7 @@ print(f"survivalplot\tdata Loading completed!\tTime: {(time_end - time_start): .
 # ---------------------
 # Function Definitions
 # ---------------------
-def plot_kaplan_meier_by_industries(df, industries, max_time=240, y_lower=0.4):
+def plot_kaplan_meier_by_industries(df, industries, max_time=240, y_lower=0.6):
     """
     Computes and returns a Plotly figure with Kaplan-Meier survival curves for multiple industries.
 
