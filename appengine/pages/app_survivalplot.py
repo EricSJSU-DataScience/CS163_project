@@ -113,7 +113,14 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=240, y_lower=0.4):
         xaxis=dict(
             range=[0, max_time], tickmode="array", tickvals=xticks, tickangle=-45
         ),
-        yaxis=dict(range=[y_lower, 1], tickmode="linear", dtick=0.05, title_standoff=20),
+        yaxis=dict(
+            range=[y_lower, 1], 
+            tickmode="linear", 
+            dtick=0.05, 
+            # ticks="outside",
+            ticklabelposition="outside",
+            # ticklabelindex=10
+        ),
         legend=dict(
             title="Industry", font=dict(size=10), xanchor="right", yanchor="top"
         ),
