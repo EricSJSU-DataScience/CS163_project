@@ -117,7 +117,7 @@ def plot_kaplan_meier_by_industries(df, industries, max_time=240, y_lower=0.4):
             range=[y_lower, 1], 
             tickmode="linear", 
             dtick=0.05, 
-            # ticks="outside",
+            ticks="outside",
             ticklabelposition="outside",
             # ticklabelindex=10
         ),
