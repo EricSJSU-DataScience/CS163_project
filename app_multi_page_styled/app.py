@@ -75,7 +75,7 @@ for page in dash.page_registry.values():
 
 app.layout = html.Div([
 
-    # # Navigation bar
+    # # Navigation bar #Eric
     html.Nav(
         id="mainNav",
         className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",
