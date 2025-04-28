@@ -18,7 +18,7 @@ layout = html.Div(className="container mt-4", children=[
 
     html.H4("Retail Trade – Future Forecasting"),
     html.Img(src="/assets/retail_prediction.png", className="img-fluid", style={"max-width": "800px"}),
-    html.Img(src="/assets/ml3.png", className="img-fluid", style={"max-width": "800px"}),
+    # html.Img(src="/assets/ml3.png", className="img-fluid", style={"max-width": "800px"}),
     html.P("The model forecasts business numbers for 2025 to 2027, continuing the growth trend and capturing seasonal variations based on past patterns."),
 
     html.H2("Random Survival Forest (RSF)"),
