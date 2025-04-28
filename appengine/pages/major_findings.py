@@ -2,7 +2,10 @@ import dash
 from dash import html
 import dash_bootstrap_components as dbc
 
-dash.register_page(__name__, path="/major-findings", name="Major Findings")
+dash.register_page(__name__, 
+                   path="/major-findings", 
+                   name="Major Findings", 
+                   order=6)
 
 layout = html.Div([
     dbc.Container([

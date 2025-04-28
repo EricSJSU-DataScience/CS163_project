@@ -1,7 +1,7 @@
 import dash
 from dash import html
 
-dash.register_page(__name__, path="/", name="Project Summary")
+# dash.register_page(__name__, path="/", name="Project Summary")
 
 layout = html.Div(
     className="container mt-4",

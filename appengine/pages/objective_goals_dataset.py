@@ -1,7 +1,10 @@
 import dash
 from dash import html
 
-dash.register_page(__name__, path="/objective-goals-datasets", name="Objective, Goals, and Datasets")
+dash.register_page(__name__, 
+                   path="/objective-goals-datasets", 
+                   name="Objective, Goals, and Datasets", 
+                   order=1)
 
 layout = html.Div(
     className="container mt-4",

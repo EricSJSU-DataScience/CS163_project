@@ -1,7 +1,8 @@
 import dash
 from dash import html
 
-dash.register_page(__name__, path="/visualization", name="Visualization")
+dash.register_page(__name__, path="/visualization", 
+                   name="Visualization", order=2)
 
 layout = html.Div(
     className="container mt-4",

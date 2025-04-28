@@ -4,7 +4,7 @@ import dash
 from dash import html
 import dash_bootstrap_components as dbc
 
-dash.register_page(__name__, path="/", name="Welcome")
+dash.register_page(__name__, path="/", name="Welcome", order=0)
 
 layout = html.Div(
     style={
