@@ -162,7 +162,13 @@ def get_survival_plot_component():
                         "Select Industries",
                         id="open-collapse-survival",
                         color="primary",
-                        className="mb-2",
+                        style={
+                            "height": "36px",
+                            "width": "150px",
+                            "fontSize": "10px",
+                            "padding": "2px 4px",
+                        },
+                        className="mt-2 ml-2",
                     ),
                     dbc.Collapse(
                         dbc.Card(
