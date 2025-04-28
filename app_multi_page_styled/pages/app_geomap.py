@@ -56,7 +56,8 @@ naics_options = [
     {"label": f"{code} - {code_sector_dict.get(code, 'Unknown')} ({naics_counts.get(code, 0)})", "value": code}
     for code in sorted(naics_counts.keys())
 ]
-default_sectors = sorted(naics_counts.keys())
+# default_sectors = sorted(naics_counts.keys())
+default_sectors = [44, 45]
 
 # ---------------------
 # Function to Build Folium Map for a Given NAICS Sector Code
@@ -87,7 +88,14 @@ def get_map_component():
                         "Select NAICS Sectors",
                         id="open-collapse",
                         color="primary",
-                        className="mb-2",
+                        style={
+                        "height": "36px",
+                        "width": "150px",
+                        "fontSize": "10px",
+                        "padding": "2px 4px",
+                        },
+                        # className="mb-2",
+                        className="mt-2 ml-2",
                     ),
                     dbc.Collapse(
                         dbc.Card(
@@ -117,7 +125,7 @@ def get_map_component():
                                 dcc.Checklist(
                                     id="sector-checklist",
                                     options=naics_options,
-                                    value=[11],  # Default selection
+                                    value=[44, 45],  # Default selection
                                     labelStyle={"display": "block"},
                                 ),
                             ])
