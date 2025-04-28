@@ -30,7 +30,7 @@ layout = html.Div(
         ]),
         html.Img(src="/assets/D2.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"}),
 
-        html.H3("3. Mean vs. Median Business Lifespan by Sector in LOS ANGELES"),
+        html.H3("3. Mean vs. Median Business Lifespan by Sector (1980-2024)"),
         html.P([
             "The updated bar chart displays both the mean and median business lifespans across sectors in Los Angeles, highlighting not only the average ",
             "survival time but also how most businesses actually perform. In nearly all sectors, the mean is greater than the median, indicating right-",
@@ -42,15 +42,28 @@ layout = html.Div(
         ]),
         html.Img(src="/assets/D3.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"}),
 
-        html.H1("Preliminary Insights", style={"marginTop": "50px"}),
+        html.H3("4. Distribution of Business Lifespan by Sector (2000-2024)", style={"marginTop": "50px"}),
         html.P([
-            "This is the overall closed businesses survival rate graph. There are observable sudden drops at each 12-month mark on the Duration axis. ",
-            "This observation might be explained by annual lease renewal cycles. To compare business survival between industries, ",
-            "we use a log-rank test. This test checks if two industries have the same survival pattern over time.\n\n",
-            "Hypothesis test:\n",
-            "Null Hypothesis (H₀): The survival rates of businesses in Industry A and Industry B are the same.\n",
-            "Alternative Hypothesis (H₁): The survival rates of businesses in Industry A and Industry B are different."
+            "Each violin represents the density and spread of how long businesses survive in a specific industry. The thicker areas show where most ",
+            "businesses are clustered in terms of lifespan, while the thinner tails highlight outliers — businesses that lasted unusually short or long.",
+            "This visualization gives us a more complete picture than just averages — helping us identify not only central tendencies but also the ",
+            "variability and skewness within each industry."
         ]),
-        html.Img(src="/assets/P1.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"})
+        html.Img(src="/assets/P1.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"}),
+
+	html.H3("5. Net Business Change Pre Month in LA (2000-2024)", style={"marginTop": "50px"}),
+        html.P([
+            "Here we examined the monthly net change in businesses from 2000 to 2024. This is calculated as the number of new businesses started minus ",
+	    "those that closed each month. We observe that earlier years, especially before 2010, show mostly positive or balanced net change — ",
+	    "indicating a growing economy. However, We see clear patterns of drops, including major dips during the 2008 financial crisis and COVID-19.",
+            "This pattern suggests seasonal business closures, possibly due to financial year-end reviews, lease expirations, or holiday-related factors. "
+        ]),
+        html.Img(src="/assets/dv1.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"}),
+
+	html.H3("6. Net Change Bussiness by month (all year combined)", style={"marginTop": "50px"}),
+        html.P([
+            "Seasonal waves repeat annually, with peaks in JAN, and significantly reduced in DEC. This pattern highlights how macroeconomic events and ", 	    "policy shifts impact business dynamics over time."
+        ]),
+        html.Img(src="/assets/dv2.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"})
     ]
 )
