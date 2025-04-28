@@ -4,7 +4,10 @@ from dash import html, dcc
 from pages.app_survivalplot import survival_plot
 
 
-dash.register_page(__name__, path="/survival", name="KM Survival Curve", order=3)
+dash.register_page(__name__, 
+                   path="/survival", 
+                   name="KM Survival Curve", 
+                   order=4)
 
 
 layout = html.Div(
