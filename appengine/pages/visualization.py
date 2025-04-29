@@ -2,10 +2,15 @@ import dash
 from dash import html
 
 dash.register_page(__name__, path="/visualization", 
-                   name="Visualization", order=2)
+                   name="Analysis-Visualization", order=2)
 
 layout = html.Div(
     className="container mt-4",
+    style={
+        'backgroundColor': 'rgba(185, 225, 219, 0.5)',
+        'padding': '50px',
+        'minHeight': '100vh'
+    },
     children=[
         html.H1("Data Visualization"),
         html.P("Create insightful visualizations (e.g., histograms, scatter plots, heatmaps):"),
