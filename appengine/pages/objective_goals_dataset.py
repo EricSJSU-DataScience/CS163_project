@@ -3,7 +3,7 @@ from dash import html
 
 dash.register_page(__name__, 
                    path="/objective-goals-datasets", 
-                   name="Objective, Goals, and Datasets", 
+                   name="Objective-Goals and Datasets", 
                    order=1)
 
 layout = html.Div(
@@ -75,18 +75,18 @@ layout = html.Div(
             html.Strong("500k entries remaining after dropping missing NAICS and LOCATION.")
         ]),
 
-        html.H1("Statistics", style={"marginTop": "40px"}),
-        html.P("Calculate measures like mean, median, standard deviation, and correlations:"),
+        # html.H1("Statistics", style={"marginTop": "40px"}),
+        # html.P("Calculate measures like mean, median, standard deviation, and correlations:"),
 
-        html.H3("1. Business Lifespan Statistics (Mean, Median, Standard Deviation) in LA"),
-        html.P([
-            "Business Lifespan Statistics (Mean, Median, Std Dev) show how long businesses last on average, "
-            "the typical lifespan, and how much variation exists between businesses. "
-            "The average business lifespan is 8.57 years, with a median of 5.96 years, meaning many businesses "
-            "close within 6 years. The standard deviation of 8.66 years suggests high variability—some businesses "
-            "last much longer while others fail quickly."
-        ]),
-        html.Img(src="/assets/S1.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"})
+        # html.H3("1. Business Lifespan Statistics (Mean, Median, Standard Deviation) in LA"),
+        # html.P([
+        #     "Business Lifespan Statistics (Mean, Median, Std Dev) show how long businesses last on average, "
+        #     "the typical lifespan, and how much variation exists between businesses. "
+        #     "The average business lifespan is 8.57 years, with a median of 5.96 years, meaning many businesses "
+        #     "close within 6 years. The standard deviation of 8.66 years suggests high variability—some businesses "
+        #     "last much longer while others fail quickly."
+        # ]),
+        # html.Img(src="/assets/S1.png", className="img-fluid", style={"width": "100%", "maxWidth": "800px"})
 
       ]
 )
