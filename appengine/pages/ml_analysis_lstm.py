@@ -8,7 +8,7 @@ from dash import html
 def get_lstm_detail():
     return html.Div(className="container mt-4", 
                     style={
-                        'backgroundColor': 'rgba(239, 163, 177, 0.5)',
+                        'backgroundColor': 'rgba(239, 163, 177, 0.2)',
                         'padding': '20px',
                         'minHeight': '100vh'
                     },
