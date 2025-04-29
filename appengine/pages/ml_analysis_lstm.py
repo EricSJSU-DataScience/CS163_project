@@ -19,9 +19,11 @@ def get_lstm_detail():
 
                         html.H4("Purpose"),
                         html.P(
-                            "Use an LSTM on historical monthly business counts to predict future retail trade numbers—"
-                            "enabling data-driven site selection, investment planning, and policy analysis by capturing "
-                            "long-term trends and seasonal patterns."
+                            "Use an LSTM on historical monthly business counts to predict future retail trade numbers."
+                            "By analyzing long-term trends and seasonal patterns, "
+                            "this tool helps assess market capacity in Retail Trade—"
+                            "predicting whether future demand will shrink or expand—"
+                            "to gauge risks for new store openings."
                         ),
 
                         html.H4("LSTM – Model Architecture"),
@@ -30,7 +32,7 @@ def get_lstm_detail():
 
                         html.H4("Retail Trade – Business Number Prediction (Test)"),
                         html.Img(src="/assets/retail_accuracy_plot.png", className="img-fluid", style={"max-width": "800px", "display": "block", "margin": "auto"}),
-                        html.P("The test results show that the LSTM model accurately tracks actual business trends from 2000 to 2024, with a high correlation between predicted and actual values."),
+                        html.P("The test results show that the LSTM model approximately tracks actual business trends from 2000 to 2024, it indicates the LSTM model performs approximately well."),
 
                         html.H4("Retail Trade – Future Forecasting"),
                         html.Img(src="/assets/retail_prediction.png", className="img-fluid", style={"max-width": "800px", "display": "block", "margin": "auto"}),
