@@ -6,7 +6,7 @@ from pages.app_survivalplot import survival_plot
 
 dash.register_page(__name__, 
                    path="/survival", 
-                   name="KM Survival Curve", 
+                   name="Analysis-KM Survival Curve", 
                    order=4)
 layout = html.Div(
     className="container mt-4",
@@ -54,6 +54,7 @@ layout = html.Div(
             ], style={"padding": "0 1rem"})
         ], open=False, style={"border": "1px solid #ddd", "borderRadius": "4px"}),
 
+        # explanation
         html.H4("Purpose"),
         html.P("Visualize LA business survival by industry with Kaplan–Meier curves to pinpoint resilient sectors, expose systemic risks, and guide site selection, policy, and investment by revealing saturated and underserved markets."),
         html.Div(
