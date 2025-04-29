@@ -37,7 +37,7 @@ def get_lstm_detail():
                         html.H4("Retail Trade – Future Forecasting"),
                         html.Img(src="/assets/retail_prediction.png", className="img-fluid", style={"max-width": "800px", "display": "block", "margin": "auto"}),
                         html.P(
-                            "The model forecasts business numbers for 2025 to 2027, continuing the growth trend and capturing seasonal variations based on past patterns. ",
+                            "The model forecasts business numbers for 2025 to 2027, continuing the growth trend. "
                             "However, the growth rate becomes smoother, indicating slower expansion in Retail Trade and heightened competition for new store openings."
                         ),
 
