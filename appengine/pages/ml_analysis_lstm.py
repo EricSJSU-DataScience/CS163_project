@@ -16,6 +16,14 @@ def get_lstm_detail():
 
                         # # LSTM 
                         html.H2("Long Short Term Memory (LSTM)"),
+
+                        html.H4("Purpose"),
+                        html.P(
+                            "Use an LSTM on historical monthly business counts to predict future retail trade numbers—"
+                            "enabling data-driven site selection, investment planning, and policy analysis by capturing "
+                            "long-term trends and seasonal patterns."
+                        ),
+
                         html.H4("LSTM – Model Architecture"),
                         html.Img(src="/assets/ml1.png", className="img-fluid", style={"max-width": "800px", "display": "block", "margin": "auto"}),
                         html.P("The LSTM model consists of stacked LSTM layers followed by dense and dropout layers, trained on sequential business number data over time."),
@@ -26,7 +34,10 @@ def get_lstm_detail():
 
                         html.H4("Retail Trade – Future Forecasting"),
                         html.Img(src="/assets/retail_prediction.png", className="img-fluid", style={"max-width": "800px", "display": "block", "margin": "auto"}),
-                        html.P("The model forecasts business numbers for 2025 to 2027, continuing the growth trend and capturing seasonal variations based on past patterns."),
+                        html.P(
+                            "The model forecasts business numbers for 2025 to 2027, continuing the growth trend and capturing seasonal variations based on past patterns. ",
+                            "However, the growth rate becomes smoother, indicating slower expansion in Retail Trade and heightened competition for new store openings."
+                        ),
 
                         ])
 
