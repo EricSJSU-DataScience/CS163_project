@@ -1,26 +1,31 @@
 import dash
 from dash import html
+from pages.ml_analysis_lstm import lstm_component
 
-dash.register_page(__name__, path="/ml", name="ML Analysis", order=5)
+dash.register_page(__name__, path="/ml", name="Analysis-ML Analysis", order=5)
 
 
 layout = html.Div(className="container mt-4", children=[
     html.H1("Machine Learning Analysis"),
 
-    html.H2("Long Short Term Memory (LSTM)"),
-    html.H4("LSTM – Model Architecture"),
-    html.Img(src="/assets/ml1.png", className="img-fluid", style={"max-width": "800px"}),
-    html.P("The LSTM model consists of stacked LSTM layers followed by dense and dropout layers, trained on sequential business number data over time."),
+    lstm_component,
 
-    html.H4("Retail Trade – Business Number Prediction (Test)"),
-    html.Img(src="/assets/retail_accuracy_plot.png", className="img-fluid", style={"max-width": "800px"}),
-    html.P("The test results show that the LSTM model accurately tracks actual business trends from 2000 to 2024, with a high correlation between predicted and actual values."),
+    # # LSTM
+    # html.H2("Long Short Term Memory (LSTM)"),
+    # html.H4("LSTM – Model Architecture"),
+    # html.Img(src="/assets/ml1.png", className="img-fluid", style={"max-width": "800px"}),
+    # html.P("The LSTM model consists of stacked LSTM layers followed by dense and dropout layers, trained on sequential business number data over time."),
 
-    html.H4("Retail Trade – Future Forecasting"),
-    html.Img(src="/assets/retail_prediction.png", className="img-fluid", style={"max-width": "800px"}),
-    # html.Img(src="/assets/ml3.png", className="img-fluid", style={"max-width": "800px"}),
-    html.P("The model forecasts business numbers for 2025 to 2027, continuing the growth trend and capturing seasonal variations based on past patterns."),
+    # html.H4("Retail Trade – Business Number Prediction (Test)"),
+    # html.Img(src="/assets/retail_accuracy_plot.png", className="img-fluid", style={"max-width": "800px"}),
+    # html.P("The test results show that the LSTM model accurately tracks actual business trends from 2000 to 2024, with a high correlation between predicted and actual values."),
 
+    # html.H4("Retail Trade – Future Forecasting"),
+    # html.Img(src="/assets/retail_prediction.png", className="img-fluid", style={"max-width": "800px"}),
+    # html.P("The model forecasts business numbers for 2025 to 2027, continuing the growth trend and capturing seasonal variations based on past patterns."),
+
+
+    # # RSF
     html.H2("Random Survival Forest (RSF)"),
     html.H4("MLA – Model Parameters"),
     html.Img(src="/assets/mla.png", className="img-fluid", style={"max-width": "800px"}),
