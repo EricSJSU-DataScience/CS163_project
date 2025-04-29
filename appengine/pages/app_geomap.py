@@ -80,10 +80,13 @@ def create_map_naics(selected_sector):
 # ---------------------
 def get_map_component():
     return html.Div([
-        html.H3("Business Map Dashboard"),
+        # html.H3("Business Map Dashboard"),
+        # html.H4("Business Map Dashboard"),
+
         dbc.Row([
             dbc.Col([
                 html.Div([
+                    # Button for industry selection
                     dbc.Button(
                         "Select NAICS Sectors",
                         id="open-collapse",
@@ -97,6 +100,8 @@ def get_map_component():
                         # className="mb-2",
                         className="mt-2 ml-2",
                     ),
+
+                    # Collapse Option for industry selection
                     dbc.Collapse(
                         dbc.Card(
                             dbc.CardBody([
@@ -142,6 +147,8 @@ def get_map_component():
                     ),
                 ], style={"position": "relative", "display": "inline-block"}),
             ], width="auto"),
+
+            # Button Apply selection
             dbc.Col([
                 dbc.Button(
                     "Apply",
