@@ -7,7 +7,7 @@ dash.register_page(__name__, path="/visualization",
 layout = html.Div(
     className="container mt-4",
     style={
-        'backgroundColor': 'rgba(185, 225, 219, 0.5)',
+        'backgroundColor': 'rgba(185, 225, 219, 0.4)',
         'padding': '50px',
         'minHeight': '100vh'
     },
