@@ -44,10 +44,12 @@ app.layout = html.Div([
     # # Navigation bar # Eric
     html.Nav(
         id="mainNav",
-        className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",
+        # className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",
+        className="navbar navbar-expand-md navbar-dark bg-dark fixed-top align-items-center",
         children=[
             html.Div(
-                className="container",
+                # className="container",
+                className="container-fluid",
                 children=[
                     html.A("Los Angeles Business", className="navbar-brand", href="/"),
                     html.Button(
@@ -69,7 +71,7 @@ app.layout = html.Div([
                         className="collapse navbar-collapse",
                         id="navbarResponsive",
                         children=html.Ul(
-                            className="navbar-nav ml-auto",
+                            className="navbar-nav ml-auto align-items-center",
                             children=nav_items,
                         )
                     )
