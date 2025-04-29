@@ -41,26 +41,7 @@ for page in dash.page_registry.values():
 
 app.layout = html.Div([
 
-    # # # Navigation bar # Rox
-    # html.Nav(
-    #     id="mainNav",
-    #     className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",
-    #     children=[
-    #         dbc.NavItem(dcc.Link("Welcome", href="/", className="nav-link")),
-    #         dbc.NavItem(dcc.Link("Objective-Goals and Datasets", href="/objective-goals-datasets", className="nav-link")),
-    #         dbc.NavItem(dcc.Link("Analysis-Visualization", href="/visualization", className="nav-link")),
-    #         dbc.NavItem(dcc.Link("Analysis-Map Dashboard", href="/map", className="nav-link")),
-    #         dbc.NavItem(dcc.Link("Analysis-KM Survival Curve", href="/survival", className="nav-link")),
-    #         dbc.NavItem(dcc.Link("Analysis-ML Analysis", href="/ml", className="nav-link")),
-	#     dbc.NavItem(dcc.Link("Major Findings", href="/major-findings", className="nav-link")),
-    #         dbc.NavItem(dcc.Link("About", href="/about", className="nav-link")),
-    #     ],
-    #     brand="Los Angeles Business Trends",
-    #     color="dark",
-    #     dark=True
-    # ),
-
-    # # Navigation bar #Eric
+    # # Navigation bar # Eric
     html.Nav(
         id="mainNav",
         className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top",
