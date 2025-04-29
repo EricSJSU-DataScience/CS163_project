@@ -10,9 +10,15 @@ dash.register_page(__name__,
 
 layout = html.Div(
     className="container mt-4",
+	style={
+        # 'backgroundColor': '#b9e1db',
+        'backgroundColor': 'rgba(185, 225, 219, 0.5)',
+        'padding': '50px',
+        'minHeight': '100vh'
+    },
     children=[
         html.H1("Business Map Dashboard"),
-        html.P("This interactive dashboard shows the geographic distribution of business across Los Angeles."),
+        # html.P("This interactive dashboard shows the geographic distribution of business across Los Angeles."),
         map_layout
     ]
 )
