@@ -5,7 +5,7 @@ from pages.app_geomap import map_layout
 
 dash.register_page(__name__, 
                    path="/map", 
-                   name="Map Dashboard", 
+                   name="Analysis-Map Dashboard", 
                    order=3)
 
 layout = html.Div(
