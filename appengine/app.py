@@ -51,7 +51,15 @@ app.layout = html.Div([
                 # className="container",
                 className="container-fluid",
                 children=[
-                    html.A("Los Angeles Business", className="navbar-brand", href="/"),
+                    # html.A(["Los Angeles", html.Br(), "Business"], className="navbar-brand", href="/"),
+                    html.A(
+                        [
+                            html.Span("Los Angeles", className="d-block"),
+                            html.Span("Business",    className="d-block"),
+                        ], 
+                        className="navbar-brand text-center", 
+                        href="/",
+                    ),
                     html.Button(
                         className="navbar-toggler navbar-toggler-right",
                         type="button",
@@ -71,7 +79,7 @@ app.layout = html.Div([
                         className="collapse navbar-collapse",
                         id="navbarResponsive",
                         children=html.Ul(
-                            className="navbar-nav ml-auto align-items-center",
+                            className="navbar-nav ml-3 align-items-center",
                             children=nav_items,
                         )
                     )
