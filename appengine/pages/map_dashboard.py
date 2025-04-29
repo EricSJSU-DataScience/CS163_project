@@ -12,8 +12,8 @@ layout = html.Div(
     className="container mt-4",
 	style={
         # 'backgroundColor': '#b9e1db',
-        'backgroundColor': 'rgba(185, 225, 219, 0.5)',
-        'padding': '50px',
+        'backgroundColor': 'rgba(185, 225, 219, 0.4)',
+        'padding': '80px',
         'minHeight': '100vh'
     },
     children=[
