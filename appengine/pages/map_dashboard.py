@@ -12,7 +12,7 @@ layout = html.Div(
     className="container mt-4",
     children=[
         html.H1("Business Map Dashboard"),
-        html.P("This interactive dashboard shows the geographic distribution of business closures across Los Angeles."),
+        html.P("This interactive dashboard shows the geographic distribution of business across Los Angeles."),
         map_layout
     ]
 )
