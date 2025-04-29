@@ -81,7 +81,61 @@ def create_map_naics(selected_sector):
 def get_map_component():
     return html.Div([
         # html.H3("Business Map Dashboard"),
-        # html.H4("Business Map Dashboard"),
+        html.H4("Purpose"),
+        html.P("Provide a location-based view of existing businesses by industry across Los Angeles to help new investors and business owners assess the competition and identify underserved areas before choosing a location."),
+        html.Div(
+            dbc.Row([
+
+                # # instruction
+                dbc.Col(
+                    html.Div([
+                        html.H5("Instructions"),
+                        html.Ul([
+                            html.Li([
+                                "Click ", 
+                                html.Strong("SELECT NAICS SECTORS"),
+                                "."
+                            ]),
+                            html.Li("Check one or more industries in the pop-up."),
+                            html.Li([
+                                "Click ",
+                                html.Strong("APPLY"),
+                                " to redraw the map."
+                            ]),
+                        ]),
+                    ])
+                ),
+
+                # # interpretation
+                dbc.Col(
+                    html.Div([
+                        html.H5("How to Interpret"),
+                        html.Ul([
+                            html.Li([
+                                html.Strong("Denser"),
+                                " orange circles indicate ", 
+                                html.Strong("more businesses"),
+                                " in the area.",
+                            ]),
+                            html.Li([
+                                "Zoom ", 
+                                html.Strong("in/out"),
+                                " to see neighborhood densities.",
+                            ]),
+                            html.Li([
+                                "A higher density may lead to ",
+                                html.Strong("saturation"),
+                                ", while fewer circles may present ",
+                                html.Strong("opportunities"),
+                                " (consider local factors like zoning or demand)."
+                            ]),
+                        ]),
+                    ])
+                ),
+                
+            ])
+        ),
+
 
         dbc.Row([
             dbc.Col([
