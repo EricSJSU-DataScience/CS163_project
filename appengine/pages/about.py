@@ -32,6 +32,12 @@ layout = html.Div(
                 )
             )
         ),
-        
+        html.Footer(
+            className="bg-black small text-center text-white-50 mt-5",
+            children=html.Div(
+                className="container",
+                children="SJSU CS163"
+            )
+        )
     ]
 )
