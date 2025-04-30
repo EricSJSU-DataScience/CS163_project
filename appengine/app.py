@@ -60,6 +60,9 @@ app.layout = html.Div([
                         className="navbar-brand text-center", 
                         href="/",
                     ),
+
+                    html.Div(children=[
+
                     html.Button(
                         className="navbar-toggler navbar-toggler-right",
                         type="button",
@@ -83,6 +86,7 @@ app.layout = html.Div([
                             children=nav_items,
                         )
                     )
+                    ]),
                 ]
             )
         ]
