@@ -11,8 +11,9 @@ dash.register_page(__name__,
 layout = html.Div(
     className="container mt-4",
     style={
-        'backgroundColor': 'rgba(180, 167, 214, 0.5)',
+        'backgroundColor': 'rgba(180, 167, 214, 0.4)',
         'padding': '50px',
+        'border-radius': '10px', 
         'minHeight': '100vh'
     },
     children=[

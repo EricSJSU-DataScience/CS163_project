@@ -31,6 +31,7 @@ def get_lstm_detail():
                     style={
                         'backgroundColor': 'rgba(239, 163, 177, 0.2)',
                         'padding': '20px',
+                        'border-radius': '10px', 
                         'minHeight': '100vh'
                     },
                     children=[

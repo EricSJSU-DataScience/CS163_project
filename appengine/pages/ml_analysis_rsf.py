@@ -32,6 +32,7 @@ def get_rsf_detail():
                     style={
                         'backgroundColor': 'rgba(242, 213, 25, 0.2)',
                         'padding': '20px',
+                        'border-radius': '10px', 
                         'minHeight': '100vh'
                     },
                     children=[

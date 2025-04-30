@@ -1,7 +1,8 @@
 import dash
 from dash import html
 
-dash.register_page(__name__, path="/visualization", name="Visualization")
+dash.register_page(__name__, path="/visualization",
+                   name="Analysis-Visualization", order=2)
 
 def alternating_block(image_src, title, description, reverse=False):
     return html.Div(
@@ -26,6 +27,12 @@ def alternating_block(image_src, title, description, reverse=False):
 
 layout = html.Div(
     className="container mt-4",
+    style={
+        'backgroundColor': 'rgba(185, 225, 219, 0.4)',
+        'padding': '20px',
+        'border-radius': '10px',
+        'minHeight': '100vh'
+    },
     children=[
         html.H1("Data Visualization", className="mb-4 text-center"),
 

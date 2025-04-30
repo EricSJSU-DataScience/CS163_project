@@ -12,102 +12,123 @@ import base64
 
 from sksurv.ensemble import RandomSurvivalForest
 
+import os
+base = os.path.dirname(os.path.abspath(__file__))     
+assets = os.path.normpath(os.path.join(base, '..', 'assets'))
+file_path = os.path.join(assets, 'naics_2_clean.csv')
+naics_df = pd.read_csv(file_path)
+
+
 # Register page (for multi-page app)
-dash.register_page(__name__, path="/major-findings", name="Major Findings")
+dash.register_page(__name__, 
+                   path="/major-findings", 
+                   name="Major Findings",
+                   order=6)
 
 
 url = "https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/main/RSF_model/rsf_model.joblib"
 response = requests.get(url)
 rsf_model = joblib.load(io.BytesIO(response.content))
 
+# file_path = "assets/naics_2_clean.csv"
+# naics_df = pd.read_csv(file_path)
+# naics_df = pd.read_csv("https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/main/RSF_model/naics_2_clean.csv")
 
-naics_df = pd.read_csv("https://raw.githubusercontent.com/EricSJSU-DataScience/CS163_project/main/RSF_model/naics_2_clean.csv")
 naics_options = [
     {"label": f"{row['Sector_Title']} ({row['Code']})", "value": int(row["Code"])}
     for _, row in naics_df.iterrows()
 ]
 
 # Layout
-layout = html.Div([
-    dbc.Container([
-        html.H1("Major Findings", className="text-center my-4"),
+layout = html.Div(
+    className="container mt-4",
+    style={
+        'background-color': 'rgba(182,213,198,0.5)', 
+        'padding': '20px', 
+        'border-radius': '10px', 
+        'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)'
+    },
+    children=[
+        dbc.Container([
+            html.H1("Major Findings", className="text-center my-4"),
 
-        html.H2("1. General Static Findings", className="my-4"),
+            html.H2("1. General Static Findings", className="my-4"),
 
-        dbc.Row([
-            dbc.Col([
-                html.H5("• Identify survival patterns and industry trends using data visualization."),
-                html.P("Businesses in sectors like Real Estate show longer survival times, while others like Manufacturing have shorter lifespans, highlighting clear industry-based survival patterns.")
+            dbc.Row([
+                dbc.Col([
+                    html.H5("• Identify survival patterns and industry trends using data visualization."),
+                    html.P("Businesses in sectors like Real Estate show longer survival times, while others like Manufacturing have shorter lifespans, highlighting clear industry-based survival patterns.")
+                ]),
+                dbc.Col([
+                    html.H5("• Analyze closure timing regularities across months and years."),
+                    html.P("Clear seasonal patterns and economic cycles emerge, with spikes in closures around December and sharp dips during crises like 2008 and 2020.")
+                ]),
+            ], className="mb-4"),
+
+            dbc.Row([
+                dbc.Col([
+                    html.H5("• Apply Kaplan-Meier survival analysis to estimate survival probability curves."),
+                    html.P("KM curves reveal steep early drop-offs in survival across most industries, but with significant variation, helping identify risk levels for different business types.")
+                ]),
+                dbc.Col([
+                    html.H5("• Develop a Random Survival Forest (RSF) model to predict survival."),
+                    html.P("RSF models incorporate user input—such as start date, industry, and location—to predict survival rates with high interpretability using historical data.")
+                ]),
+            ], className="mb-4"),
+
+            dbc.Row([
+                dbc.Col([
+                    html.H5("• Help new business owners make informed decisions."),
+                    html.P("These findings serve as decision-support tools for choosing optimal sectors, locations, and starting times based on historical success rates and projections.")
+                ]),
             ]),
-            dbc.Col([
-                html.H5("• Analyze closure timing regularities across months and years."),
-                html.P("Clear seasonal patterns and economic cycles emerge, with spikes in closures around December and sharp dips during crises like 2008 and 2020.")
-            ]),
-        ], className="mb-4"),
 
-        dbc.Row([
-            dbc.Col([
-                html.H5("• Apply Kaplan-Meier survival analysis to estimate survival probability curves."),
-                html.P("KM curves reveal steep early drop-offs in survival across most industries, but with significant variation, helping identify risk levels for different business types.")
-            ]),
-            dbc.Col([
-                html.H5("• Develop a Random Survival Forest (RSF) model to predict survival."),
-                html.P("RSF models incorporate user input—such as start date, industry, and location—to predict survival rates with high interpretability using historical data.")
-            ]),
-        ], className="mb-4"),
+            html.Hr(),
 
-        dbc.Row([
-            dbc.Col([
-                html.H5("• Help new business owners make informed decisions."),
-                html.P("These findings serve as decision-support tools for choosing optimal sectors, locations, and starting times based on historical success rates and projections.")
-            ]),
-        ]),
+            # === RSF Interactive Section ===
+            html.H2("2. RSF Business Survival Predictor", className="my-4"),
 
-        html.Hr(),
+            dbc.Row([
+                dbc.Col([
+                    dbc.Label("Start Year"),
+                    dcc.Dropdown(
+                        id="start-year",
+                        options=[{"label": str(y), "value": y} for y in range(2026, 2031)],
+                        value=2026
+                    ),
 
-        # === RSF Interactive Section ===
-        html.H2("2. RSF Business Survival Predictor", className="my-4"),
+                    dbc.Label("Start Month"),
+                    dcc.Dropdown(
+                        id="start-month",
+                        options=[{"label": str(m), "value": m} for m in range(1, 13)],
+                        value=1
+                    ),
 
-        dbc.Row([
-            dbc.Col([
-                dbc.Label("Start Year"),
-                dcc.Dropdown(
-                    id="start-year",
-                    options=[{"label": str(y), "value": y} for y in range(2026, 2031)],
-                    value=2026
-                ),
+                    dbc.Label("Council District"),
+                    dcc.Dropdown(
+                        id="council-district",
+                        options=[{"label": str(d), "value": d} for d in range(0, 16)],
+                        value=14    #district of LA city
+                    ),
 
-                dbc.Label("Start Month"),
-                dcc.Dropdown(
-                    id="start-month",
-                    options=[{"label": str(m), "value": m} for m in range(1, 13)],
-                    value=1
-                ),
+                    dbc.Label("NAICS Code"),
+                    dcc.Dropdown(
+                        id="naics-code",
+                        options=naics_options,
+                        value=naics_options[7]["value"] if naics_options else None
+                    ),
 
-                dbc.Label("Council District"),
-                dcc.Dropdown(
-                    id="council-district",
-                    options=[{"label": str(d), "value": d} for d in range(0, 16)],
-                    value=0
-                ),
+                    dbc.Button("Predict Survival", id="predict-btn", color="primary", className="mt-3"),
+                ], md=4),
 
-                dbc.Label("NAICS Code"),
-                dcc.Dropdown(
-                    id="naics-code",
-                    options=naics_options,
-                    value=naics_options[0]["value"] if naics_options else None
-                ),
-
-                dbc.Button("Predict Survival", id="predict-btn", color="primary", className="mt-3"),
-            ], md=4),
-
-            dbc.Col([
-                html.Div(id="prediction-output", className="mt-3"),
-                html.Img(id="survival-plot", style={"marginTop": "20px", "width": "100%"})
-            ], md=8)
-        ])
-    ], fluid=True)
-])
+                dbc.Col([
+                    html.Div(id="prediction-output", className="mt-3"),
+                    html.Img(id="survival-plot", style={"marginTop": "20px", "width": "100%"})
+                ], md=8)
+            ])
+        ], fluid=True)
+    ]
+)
 
 # === Callbacks ===
 
