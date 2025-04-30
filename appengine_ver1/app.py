@@ -27,6 +27,7 @@ server = app.server
 app.layout = html.Div([
     dbc.NavbarSimple(
         children=[
+<<<<<<< HEAD
             dbc.NavItem(dcc.Link("Welcome", href="/", className="nav-link")),
             dbc.NavItem(dcc.Link("Objective-Goals and Datasets", href="/objective-goals-datasets", className="nav-link")),
             dbc.NavItem(dcc.Link("Analysis-Visualization", href="/visualization", className="nav-link")),
@@ -39,6 +40,51 @@ app.layout = html.Div([
         brand="Los Angeles Business Trends",
         color="dark",
         dark=True
+=======
+            html.Div(
+                # className="container",
+                className="container-fluid",
+                children=[
+                    # html.A(["Los Angeles", html.Br(), "Business"], className="navbar-brand", href="/"),
+                    html.A(
+                        [
+                            html.Span("Los Angeles", className="d-block"),
+                            html.Span("Business",    className="d-block"),
+                        ], 
+                        className="navbar-brand text-center", 
+                        href="/",
+                    ),
+
+                    html.Div(children=[
+
+                    html.Button(
+                        className="navbar-toggler navbar-toggler-right",
+                        type="button",
+                        **{
+                            "data-toggle": "collapse",
+                            "data-target": "#navbarResponsive",
+                            "aria-controls": "navbarResponsive",
+                            "aria-expanded": "false",
+                            "aria-label": "Toggle navigation"
+                        },
+                        children=[
+                            "Menu ",
+                            html.I(className="fas fa-bars")
+                        ]
+                    ),
+                    html.Div(
+                        className="collapse navbar-collapse",
+                        id="navbarResponsive",
+                        children=html.Ul(
+                            className="navbar-nav ml-3 align-items-center",
+                            children=nav_items,
+                        )
+                    )
+                    ]),
+                ]
+            )
+        ]
+>>>>>>> 2c310d5da62b3ccba5f3eafc6531d902bab51d51
     ),
     dash.page_container
 ])
