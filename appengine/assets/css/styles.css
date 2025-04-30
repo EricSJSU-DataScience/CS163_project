@@ -10993,7 +10993,7 @@ body {
   outline: none;
 }
 #mainNav .navbar-brand {
-  color: #000;
+  color: #bbb;
   font-weight: 700;
   padding: 0.9rem 0;
 }
@@ -11036,7 +11036,7 @@ body {
     color: #bbb;
   }
   #mainNav.navbar-shrink .nav-link {
-    color: #eee;
+    color: #ccc;
     padding: 1.5rem 1.5rem 1.25rem;
     border-bottom: 0.25rem solid transparent;
   }
