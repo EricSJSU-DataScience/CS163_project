@@ -241,9 +241,7 @@ For website, the code runs on Google App Engine. The `app.yaml` configuration fi
 
 ## 🌐 Website
 
-[Eric's link](https://my-project-cs122-20241114.uw.r.appspot.com/)
-
-[Ruxin's link](https://cs163b.uw.r.appspot.com/)
+[link](https://cs163b.uw.r.appspot.com/)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
